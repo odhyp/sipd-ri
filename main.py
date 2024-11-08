@@ -79,8 +79,34 @@ class SIPDBot:
         if self.browser:
             self.browser.close()
 
-    def sample(self):
+    def download_realisasi(self):
         self._login()
+
+        url_realisasi = "https://sipd.kemendagri.go.id/penatausahaan/penatausahaan/pengeluaran/laporan/realisasi"
+        self.page.goto(url_realisasi)
+
+        menu_title = self.page.locator('h1:has-text("Laporan Realisasi")')
+        menu_title.wait_for()
+
+        # Download form
+        submenu_skpd = self.page.locator("div.css-j93siq input").first
+        submenu_skpd.wait_for()
+        submenu_skpd.click()
+        submenu_skpd.type("Unduh Semua SKPD")
+        submenu_skpd.press("Enter")
+
+        submenu_bulan = self.page.locator("div.css-j93siq input").nth(1)
+        submenu_bulan.wait_for()
+        submenu_bulan.click()
+        submenu_bulan.type("Januari")
+        submenu_bulan.press("Enter")
+
+        with self.page.expect_download(timeout=60_000) as download_info:
+            btn_download = self.page.locator('button:has-text("Download")')
+            btn_download.click()
+
+        download_file = download_info.value
+        download_file.save_as(download_file.suggested_filename)
 
         print("SAMPLE >>>>>>>>>>>>>>>")
         time.sleep(5)
@@ -91,7 +117,7 @@ def main():
     password = os.getenv("SIPD_PASSWORD")
 
     bot = SIPDBot(username=username, password=password)
-    bot.sample()
+    bot.download_realisasi()
     bot.close_browser()
 
 
