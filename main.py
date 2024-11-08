@@ -10,7 +10,10 @@ load_dotenv()
 
 def play_notification():
     sound_path = "assets/notification.wav"
-    winsound.PlaySound(sound_path, winsound.SND_FILENAME)
+    try:
+        winsound.PlaySound(sound_path, winsound.SND_FILENAME)
+    except KeyboardInterrupt:
+        pass
 
 
 def main():
