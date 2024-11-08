@@ -73,17 +73,17 @@ class SIPDBot:
         time.sleep(5)
         print(">>>>>>>>>>>>>>>>>>>>>>HERE")
 
+    def close_browser(self):
+        if self.context:
+            self.context.close()
+        if self.browser:
+            self.browser.close()
+
     def sample(self):
         self._login()
 
         print("SAMPLE >>>>>>>>>>>>>>>")
         time.sleep(5)
-
-    def close(self):
-        if self.context:
-            self.context.close()
-        if self.browser:
-            self.browser.close()
 
 
 def main():
@@ -92,7 +92,7 @@ def main():
 
     bot = SIPDBot(username=username, password=password)
     bot.sample()
-    bot.close()
+    bot.close_browser()
 
 
 if __name__ == "__main__":
