@@ -91,6 +91,9 @@ class SIPDBot:
         time.sleep(5)
         print(">>>>>>>>>>>>>>>>>>>>>>HERE")
 
+    def start_browser(self):
+        self._login()
+
     def close_browser(self):
         if self.context:
             self.context.close()
@@ -179,7 +182,11 @@ def main():
     password = os.getenv("SIPD_PASSWORD")
 
     bot = SIPDBot(username=username, password=password)
-    bot.download_realisasi()
+    bot.start_browser()
+
+    bot.download_realisasi(1)
+    bot.sample()
+
     bot.close_browser()
 
 
