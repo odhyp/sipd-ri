@@ -3,7 +3,8 @@ import time
 import winsound
 
 from dotenv import load_dotenv
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
+
 
 load_dotenv()
 
@@ -79,36 +80,69 @@ class SIPDBot:
         if self.browser:
             self.browser.close()
 
-    def download_realisasi(self):
-        self._login()
+    def download_realisasi(self, month=1):
+        month_list = [
+            "Januari",
+            "Februari",
+            "Maret",
+            "April",
+            "Mei",
+            "Juni",
+            "Juli",
+            "Agustus",
+            "September",
+            "Oktober",
+            "November",
+            "Desember",
+        ]
 
-        url_realisasi = "https://sipd.kemendagri.go.id/penatausahaan/penatausahaan/pengeluaran/laporan/realisasi"
-        self.page.goto(url_realisasi)
+        print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>DOWNLOAD REALISASI START")
 
+        url = "https://sipd.kemendagri.go.id/penatausahaan/penatausahaan/pengeluaran/laporan/realisasi"
+        self.page.goto(url)
         menu_title = self.page.locator('h1:has-text("Laporan Realisasi")')
         menu_title.wait_for()
 
-        # Download form
+        # Download form - SKPD
         submenu_skpd = self.page.locator("div.css-j93siq input").first
         submenu_skpd.wait_for()
         submenu_skpd.click()
         submenu_skpd.type("Unduh Semua SKPD")
         submenu_skpd.press("Enter")
 
-        submenu_bulan = self.page.locator("div.css-j93siq input").nth(1)
-        submenu_bulan.wait_for()
-        submenu_bulan.click()
-        submenu_bulan.type("Januari")
-        submenu_bulan.press("Enter")
+        for i in range(month):
+            current = i + 1
+            print(f"({current}/{month}) --- Downloading file...")
 
-        with self.page.expect_download(timeout=60_000) as download_info:
-            btn_download = self.page.locator('button:has-text("Download")')
-            btn_download.click()
+            try:
+                # Download form - Bulan
+                submenu_bulan = self.page.locator("div.css-j93siq input").nth(1)
+                submenu_bulan.wait_for(timeout=60_000)
+                submenu_bulan.click()
+                submenu_bulan.type(month_list[i])
+                submenu_bulan.press("Enter")
 
-        download_file = download_info.value
-        download_file.save_as(download_file.suggested_filename)
+                # FIXME: handle error for failed/timeout download
+                try:
+                    with self.page.expect_download(timeout=120_000) as download_info:
+                        btn_download = self.page.locator('button:has-text("Download")')
+                        btn_download.click()
 
-        print("SAMPLE >>>>>>>>>>>>>>>")
+                    download_name = f"Laporan Realisasi - {current}.xlsx"
+                    download_file = download_info.value
+                    download_file.save_as(download_name)
+
+                    print(f"({current}/{month}) --- Download success!")
+                    print(f"({current}/{month}) --- File saved as {download_name}")
+
+                except PlaywrightTimeoutError as e:
+                    print(f"({current}/{month}) --- Download failed: {e}")
+                    continue
+
+            except IndexError:  # Catching month values > 12
+                continue
+
+        print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>DOWNLOAD REALISASI END")
         time.sleep(5)
 
 
