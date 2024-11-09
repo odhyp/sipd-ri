@@ -8,9 +8,6 @@ from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeo
 
 load_dotenv()
 
-URL_SIPD_LOGIN = "https://sipd.kemendagri.go.id/penatausahaan/login"
-URL_SIPD_AKLAP = "https://sipd.kemendagri.go.id/penatausahaan/aklap"
-
 
 def play_notification():
     sound_path = "assets/notification.wav"
@@ -21,6 +18,13 @@ def play_notification():
 
 
 class SIPDBot:
+    _URL_LOGIN = "https://sipd.kemendagri.go.id/penatausahaan/login"
+    _URL_PENATAUSAHAAN = "https://sipd.kemendagri.go.id/penatausahaan"
+    _URL_PENATAUSAHAAN_REALISASI = (
+        f"{_URL_PENATAUSAHAAN}/penatausahaan/pengeluaran/laporan/realisasi"
+    )
+    _URL_AKLAP = "https://sipd.kemendagri.go.id/penatausahaan/aklap"
+
     def __init__(self, username, password):
         self.username = username
         self.password = password
@@ -41,7 +45,7 @@ class SIPDBot:
             self._initialize_browser()
 
         # TODO: add fail-safe for bad connection
-        self.page.goto(URL_SIPD_LOGIN, timeout=60_000)
+        self.page.goto(self._URL_LOGIN, timeout=60_000)
 
         # Login Form
         input_username = self.page.locator("#ed_username")
@@ -98,8 +102,7 @@ class SIPDBot:
 
         print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>DOWNLOAD REALISASI START")
 
-        url = "https://sipd.kemendagri.go.id/penatausahaan/penatausahaan/pengeluaran/laporan/realisasi"
-        self.page.goto(url)
+        self.page.goto(self._URL_PENATAUSAHAAN_REALISASI)
         menu_title = self.page.locator('h1:has-text("Laporan Realisasi")')
         menu_title.wait_for()
 
