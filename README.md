@@ -2,15 +2,15 @@
 
 A bot/helper for SIPD RI and accounting automations
 
-## Class and methods
+## To-do List
 
 - SIPDBot
-  1. [x] Penatausahaan --- Download Realisasi for given month(s)
-  2. [ ] AKLAP --- Input Jurnal Umum (Penyusutan)
-  3. [ ] AKLAP --- Posting Jurnal (Approve Jurnal) Belanja
+  - [x] Penatausahaan --- Download Realisasi for given month(s)
+  - [ ] AKLAP --- Input Jurnal Umum (Penyusutan)
+  - [ ] AKLAP --- Posting Jurnal (Approve Jurnal) Belanja
 - ExcelHelper
-  1. [ ] Compile Laporan Realisasi
-  2. [ ] Data cleaning Laporan Realisasi Compile
-  3. [ ] Compress file excel (optional)
-  4. [ ] Susun LRA Mingguan
-  5. [ ] Susun LRA Bulanan
+  - [ ] Compile Laporan Realisasi
+  - [ ] Data cleaning Laporan Realisasi Compile
+  - [ ] Compress file excel (optional)
+  - [ ] Susun LRA Mingguan
+  - [ ] Susun LRA Bulanan
