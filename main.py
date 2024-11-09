@@ -4,17 +4,30 @@ import winsound
 
 from dotenv import load_dotenv
 from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
+from playsound import playsound
 
 
 load_dotenv()
 
 
-def play_notification():
-    sound_path = "assets/notification.wav"
+def play_notification(audio_type=1):
+    audio_path = {
+        1: "assets/audio/mixkit-happy-bells-notification-937.wav",
+        2: "assets/audio/mixkit-software-interface-start-2574.wav",
+        3: "assets/audio/mixkit-software-interface-back-2575.wav",
+        4: "assets/audio/mixkit-correct-answer-tone-2870.wav",
+    }
+
     try:
-        winsound.PlaySound(sound_path, winsound.SND_FILENAME)
-    except KeyboardInterrupt:
-        pass
+        playsound(audio_path[audio_type])
+    except FileNotFoundError:
+        print(f"Audio error: The audio file '{audio_path[audio_type]}' was not found.")
+    except PermissionError:
+        print(f"Audio error: Permission denied accessing '{audio_path[audio_type]}'.")
+    except KeyError:
+        print(f"Audio error: Audio not found for type {audio_type}")
+    except Exception as e:
+        print(f"Audio error: {e}")
 
 
 class SIPDBot:
@@ -67,7 +80,7 @@ class SIPDBot:
 
         # CAPTCHA form
         # TODO: add input() to delay automation after user fill the CAPTCHA form
-        play_notification()
+        play_notification(1)
 
         # Sidebar - Akuntansi
         # TODO: change wait for a more universal element e.g. title
@@ -101,6 +114,7 @@ class SIPDBot:
         ]
 
         print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>DOWNLOAD REALISASI START")
+        play_notification(2)
 
         self.page.goto(self._URL_PENATAUSAHAAN_REALISASI)
         menu_title = self.page.locator('h1:has-text("Laporan Realisasi")')
@@ -137,6 +151,7 @@ class SIPDBot:
 
                     print(f"({current}/{month}) --- Download success!")
                     print(f"({current}/{month}) --- File saved as {download_name}")
+                    play_notification(4)
 
                 except PlaywrightTimeoutError as e:
                     print(f"({current}/{month}) --- Download failed: {e}")
@@ -146,7 +161,17 @@ class SIPDBot:
                 continue
 
         print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>DOWNLOAD REALISASI END")
+        play_notification(3)
+
+    def sample(self):
+        print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ACCESS AKLAP START")
+        play_notification(2)
+
+        self.page.goto(self._URL_AKLAP)
         time.sleep(5)
+
+        print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ACCESS AKLAP END")
+        play_notification(3)
 
 
 def main():
