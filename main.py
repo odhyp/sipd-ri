@@ -155,10 +155,10 @@ class SIPDBot:
 
                 except PlaywrightTimeoutError as e:
                     print(f"({current}/{month}) --- Download failed: {e}")
-                    continue
+                    # TODO: add retry download for failed downloads
 
             except IndexError:  # Catching month values > 12
-                continue
+                print(f"({current}/{month}) --- There are only 12 months!")
 
         print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>DOWNLOAD REALISASI END")
         play_notification(3)
