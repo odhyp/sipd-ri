@@ -16,6 +16,8 @@ def play_notification(audio_type=1):
     except PermissionError:
         print(f"Audio error: Permission denied accessing '{audio_path[audio_type]}'.")
     except KeyError:
-        print(f"Audio error: Audio not found for type {audio_type}")
+        print(f"Audio error: Audio not found for type {audio_type}.")
+    except RuntimeError:
+        print(f"Audio error: Audio playback error.")
     except Exception as e:
-        print(f"Audio error: {e}")
+        print(f"Audio error: {e}.")
