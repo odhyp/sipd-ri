@@ -122,7 +122,7 @@ class SIPDBot:
                         btn_download = self.page.locator('button:has-text("Download")')
                         btn_download.click()
 
-                    download_name = f"Laporan Realisasi - {current}.xlsx"
+                    download_name = f"Laporan Realisasi - {current:02}.xlsx"
                     download_file = download_info.value
                     download_file.save_as(download_name)
 
