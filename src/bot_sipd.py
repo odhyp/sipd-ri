@@ -1,6 +1,7 @@
 import time
 
 from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
+from src.utils import play_notification
 
 
 class SIPDBot:
@@ -56,6 +57,8 @@ class SIPDBot:
 
         # CAPTCHA form
         # TODO: add input() to delay automation after user fill the CAPTCHA form
+        self.page.bring_to_front()
+        play_notification(1)
 
         # Sidebar - Akuntansi
         # TODO: change wait for a more universal element e.g. title
@@ -92,6 +95,7 @@ class SIPDBot:
         ]
 
         print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>DOWNLOAD REALISASI START")
+        play_notification(2)
 
         self.page.goto(self._URL_PENATAUSAHAAN_REALISASI)
         menu_title = self.page.locator('h1:has-text("Laporan Realisasi")')
@@ -128,6 +132,7 @@ class SIPDBot:
 
                     print(f"({current}/{month}) --- Download success!")
                     print(f"({current}/{month}) --- File saved as {download_name}")
+                    play_notification(4)
 
                 except PlaywrightTimeoutError as e:
                     print(f"({current}/{month}) --- Download failed: {e}")
@@ -136,12 +141,15 @@ class SIPDBot:
             except IndexError:  # Catching month values > 12
                 print(f"({current}/{month}) --- There are only 12 months!")
 
+        play_notification(3)
         print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>DOWNLOAD REALISASI END")
 
     def sample(self):
         print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ACCESS AKLAP START")
+        play_notification(2)
 
         self.page.goto(self._URL_AKLAP)
         time.sleep(5)
 
+        play_notification(3)
         print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ACCESS AKLAP END")
