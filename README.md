@@ -9,8 +9,13 @@ A bot/helper for SIPD RI and accounting automations
   - [ ] AKLAP --- Input Jurnal Umum (Penyusutan)
   - [ ] AKLAP --- Posting Jurnal (Approve Jurnal) Belanja
 - ExcelHelper
-  - [ ] Compile Laporan Realisasi
-  - [ ] Data cleaning Laporan Realisasi Compile
-  - [ ] Compress file excel (optional)
-  - [ ] Susun LRA Mingguan
-  - [ ] Susun LRA Bulanan
+  - [ ] compress excel files
+  - [ ] compile Laporan Realisasi
+  - [ ] data cleaning Laporan Realisasi Compile
+  - [ ] compress file excel (optional)
+  - [ ] create LRA Mingguan
+  - [ ] create LRA Bulanan
+- Other
+  - [ ] remove/change test print and time.sleep
+  - [ ] add docstring for class and class methods
+  - [ ] add utils.py
