@@ -1,3 +1,5 @@
+import os
+from pathlib import Path
 from playsound import playsound
 
 
@@ -41,4 +43,20 @@ def get_month_name(index):
     return month_list[index - 1]
 
 
-play_notification(1)
+class PathHelper:
+
+    @staticmethod
+    def get_download_path() -> str:
+        pass
+
+    @staticmethod
+    def get_root_path() -> str:
+        root_path = Path(os.getcwd())
+        return str(root_path)
+
+    @staticmethod
+    def get_output_path(output_dir: str, file_name: str) -> str:
+        output_path = Path("output", output_dir)
+        output_path.mkdir(parents=True, exist_ok=True)
+        output_path = Path(output_path, file_name)
+        return str(output_path)
