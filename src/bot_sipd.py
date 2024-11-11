@@ -1,7 +1,7 @@
 import time
 
 from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
-from src.utils import play_notification
+from src.utils import play_notification, get_month_name
 
 
 class SIPDBot:
@@ -79,21 +79,6 @@ class SIPDBot:
             self.browser.close()
 
     def download_realisasi(self, month=1):
-        month_list = [
-            "Januari",
-            "Februari",
-            "Maret",
-            "April",
-            "Mei",
-            "Juni",
-            "Juli",
-            "Agustus",
-            "September",
-            "Oktober",
-            "November",
-            "Desember",
-        ]
-
         print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>DOWNLOAD REALISASI START")
         play_notification(2)
 
@@ -108,16 +93,15 @@ class SIPDBot:
         submenu_skpd.type("Unduh Semua SKPD")
         submenu_skpd.press("Enter")
 
-        for i in range(month):
-            current = i + 1
-            print(f"({current}/{month}) --- Downloading file...")
+        for i in range(1, month + 1):
+            print(f"({i}/{month}) --- Downloading file...")
 
             try:
                 # Download form - Bulan
                 submenu_bulan = self.page.locator("div.css-j93siq input").nth(1)
                 submenu_bulan.wait_for(timeout=60_000)
                 submenu_bulan.click()
-                submenu_bulan.type(month_list[i])
+                submenu_bulan.type(get_month_name(i))
                 submenu_bulan.press("Enter")
 
                 # FIXME: handle error for failed/timeout download
@@ -126,20 +110,20 @@ class SIPDBot:
                         btn_download = self.page.locator('button:has-text("Download")')
                         btn_download.click()
 
-                    download_name = f"Laporan Realisasi - {current:02}.xlsx"
+                    download_name = f"Laporan Realisasi - {i:02}.xlsx"
                     download_file = download_info.value
                     download_file.save_as(download_name)
 
-                    print(f"({current}/{month}) --- Download success!")
-                    print(f"({current}/{month}) --- File saved as {download_name}")
+                    print(f"({i}/{month}) --- Download success!")
+                    print(f"({i}/{month}) --- File saved as {download_name}")
                     play_notification(4)
 
                 except PlaywrightTimeoutError as e:
-                    print(f"({current}/{month}) --- Download failed: {e}")
+                    print(f"({i}/{month}) --- Download failed: {e}")
                     # TODO: add retry download for failed downloads
 
             except IndexError:  # Catching month values > 12
-                print(f"({current}/{month}) --- There are only 12 months!")
+                print(f"({i}/{month}) --- There are only 12 months!")
 
         play_notification(3)
         print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>DOWNLOAD REALISASI END")

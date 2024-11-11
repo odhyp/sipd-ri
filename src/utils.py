@@ -21,3 +21,24 @@ def play_notification(audio_type=1):
         print(f"Audio error: Audio playback error.")
     except Exception as e:
         print(f"Audio error: {e}.")
+
+
+def get_month_name(index):
+    month_list = [
+        "Januari",
+        "Februari",
+        "Maret",
+        "April",
+        "Mei",
+        "Juni",
+        "Juli",
+        "Agustus",
+        "September",
+        "Oktober",
+        "November",
+        "Desember",
+    ]
+    return month_list[index - 1]
+
+
+play_notification(1)
