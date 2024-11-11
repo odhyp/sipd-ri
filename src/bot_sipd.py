@@ -1,7 +1,7 @@
 import time
 
 from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
-from src.utils import play_notification, get_month_name
+from src.utils import play_notification, get_month_name, PathHelper
 
 
 class SIPDBot:
@@ -110,9 +110,15 @@ class SIPDBot:
                         btn_download = self.page.locator('button:has-text("Download")')
                         btn_download.click()
 
+                    # TODO: update downlaod_dir name using today's date
+                    download_dir = "LRA"
                     download_name = f"Laporan Realisasi - {i:02}.xlsx"
+                    download_path = PathHelper.get_output_path(
+                        output_dir=download_dir, file_name=download_name
+                    )
+
                     download_file = download_info.value
-                    download_file.save_as(download_name)
+                    download_file.save_as(download_path)
 
                     print(f"({i}/{month}) --- Download success!")
                     print(f"({i}/{month}) --- File saved as {download_name}")
