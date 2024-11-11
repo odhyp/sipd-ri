@@ -94,7 +94,7 @@ class SIPDBot:
         submenu_skpd.press("Enter")
 
         for i in range(1, month + 1):
-            print(f"({i}/{month}) --- Downloading file...")
+            print(f"({i:02}/{month}) --- Downloading file...")
 
             try:
                 # Download form - Bulan
@@ -120,16 +120,17 @@ class SIPDBot:
                     download_file = download_info.value
                     download_file.save_as(download_path)
 
-                    print(f"({i}/{month}) --- Download success!")
-                    print(f"({i}/{month}) --- File saved as {download_name}")
+                    print(
+                        f"({i:02}/{month}) --- Download success! File saved as {download_name}"
+                    )
                     play_notification(4)
 
                 except PlaywrightTimeoutError as e:
-                    print(f"({i}/{month}) --- Download failed: {e}")
+                    print(f"({i:02}/{month}) --- Download failed: {e}")
                     # TODO: add retry download for failed downloads
 
             except IndexError:  # Catching month values > 12
-                print(f"({i}/{month}) --- There are only 12 months!")
+                print(f"({i:02}/{month}) --- There are only 12 months!")
 
         play_notification(3)
         print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>DOWNLOAD REALISASI END")
