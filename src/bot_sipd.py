@@ -77,7 +77,7 @@ class SIPDBot:
         if self.browser:
             self.browser.close()
 
-    def download_realisasi(self, month=1):
+    def download_realisasi(self, month=1, output_dir="laporan_realisasi"):
         print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>DOWNLOAD REALISASI START")
 
         self.page.goto(self._URL_PENATAUSAHAAN_REALISASI)
@@ -109,8 +109,8 @@ class SIPDBot:
                         btn_download.click()
 
                     # TODO: update downlaod_dir name using today's date
-                    download_dir = "LRA"
-                    download_name = f"Laporan Realisasi - {i:02}.xlsx"
+                    download_dir = output_dir
+                    download_name = f"2024-{i:02}-Laporan Realisasi.xlsx"
                     download_path = PathHelper.get_output_path(
                         output_dir=download_dir, file_name=download_name
                     )
