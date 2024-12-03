@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 from playsound import playsound
+from datetime import datetime
 
 
 def play_notification(audio_type=1):
@@ -41,6 +42,10 @@ def get_month_name(index):
         "Desember",
     ]
     return month_list[index - 1]
+
+
+def get_current_date() -> str:
+    return datetime.now().strftime("%Y-%m-%d")
 
 
 class PathHelper:

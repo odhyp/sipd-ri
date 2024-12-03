@@ -108,8 +108,8 @@ class SIPDBot:
                         btn_download = self.page.locator('button:has-text("Download")')
                         btn_download.click()
 
-                    # TODO: update downlaod_dir name using today's date
-                    download_dir = output_dir
+                    current_date = get_current_date()
+                    download_dir = f"Laporan Realisasi {current_date}"
                     download_name = f"2024-{i:02}-Laporan Realisasi.xlsx"
                     download_path = PathHelper.get_output_path(
                         output_dir=download_dir, file_name=download_name
