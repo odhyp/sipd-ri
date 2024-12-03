@@ -1,7 +1,7 @@
 import time
 
 from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
-from src.utils import play_notification, get_month_name, PathHelper
+from src.utils import get_month_name, get_current_date, PathHelper
 
 
 class SIPDBot:
@@ -77,9 +77,7 @@ class SIPDBot:
         if self.browser:
             self.browser.close()
 
-    def download_realisasi(self, month=1, output_dir="laporan_realisasi"):
-        print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>DOWNLOAD REALISASI START")
-
+    def download_realisasi(self, start_month=1, end_month=1):
         self.page.goto(self._URL_PENATAUSAHAAN_REALISASI)
         menu_title = self.page.locator('h1:has-text("Laporan Realisasi")')
         menu_title.wait_for()
@@ -91,8 +89,8 @@ class SIPDBot:
         submenu_skpd.type("Unduh Semua SKPD")
         submenu_skpd.press("Enter")
 
-        for i in range(1, month + 1):
-            print(f"({i:02}/{month}) --- Downloading file...")
+        for i in range(start_month, end_month + 1):
+            print(f"({i}/{end_month}) --- Downloading file...")
 
             try:
                 # Download form - Bulan
@@ -119,22 +117,12 @@ class SIPDBot:
                     download_file.save_as(download_path)
 
                     print(
-                        f"({i:02}/{month}) --- Download success! File saved as {download_name}"
+                        f"({i}/{end_month}) --- Download success! File saved as {download_name}"
                     )
 
                 except PlaywrightTimeoutError as e:
-                    print(f"({i:02}/{month}) --- Download failed: {e}")
+                    print(f"({i}/{end_month}) --- Download failed: {e}")
                     # TODO: add retry download for failed downloads
 
             except IndexError:  # Catching month values > 12
-                print(f"({i:02}/{month}) --- There are only 12 months!")
-
-        print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>DOWNLOAD REALISASI END")
-
-    def sample(self):
-        print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ACCESS AKLAP START")
-
-        self.page.goto(self._URL_AKLAP)
-        time.sleep(5)
-
-        print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ACCESS AKLAP END")
+                print(f"({i}/{end_month}) --- There are only 12 months!")
