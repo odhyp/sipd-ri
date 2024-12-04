@@ -1,21 +1,16 @@
-import os
-from dotenv import load_dotenv
-from src.bot_sipd import SIPDBot
+"""
+A helper script for SIPD-RI by Odhy Pradhana
+"""
 
-load_dotenv()
+from src.helper_main import main_menu
 
 
 def main():
-    username = os.getenv("SIPD_USERNAME")
-    password = os.getenv("SIPD_PASSWORD")
-
-    bot = SIPDBot(username=username, password=password)
-    bot.start_browser()
-
-    bot.download_realisasi(1)
-    bot.sample()
-
-    bot.close_browser()
+    """
+    The entry point of the program.
+    Calls the `main_menu` function to initialize the application's main menu.
+    """
+    main_menu()
 
 
 if __name__ == "__main__":
