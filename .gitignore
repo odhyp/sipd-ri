@@ -1,3 +1,6 @@
+# SIPD-RI specifics
+cookies.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
