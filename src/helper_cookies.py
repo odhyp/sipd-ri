@@ -1,8 +1,21 @@
+"""
+A helper module for managing cookies used in SIPDBot class.
+"""
+
 import json
 from playwright.sync_api import sync_playwright
 
 
 def save_cookies():
+    """
+    Save current session cookies after a successful login attempt.
+
+    User need to manually fill the login and CAPTCHA form. After a successful login,
+    press Enter to continue and save the cookies.
+
+    Output:
+        cookies.json (file): A JSON file containing the session cookies.
+    """
     url_login = "https://sipd.kemendagri.go.id/penatausahaan/login"
 
     playwright = sync_playwright().start()
