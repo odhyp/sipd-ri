@@ -12,9 +12,7 @@ class SIPDBot:
     )
     _URL_AKLAP = "https://sipd.kemendagri.go.id/penatausahaan/aklap"
 
-    def __init__(self, username, password):
-        self.username = username
-        self.password = password
+    def __init__(self):
         self.browser = None
         self.context = None
         self.page = None
@@ -41,10 +39,10 @@ class SIPDBot:
         input_username = self.page.locator("#ed_username")
         input_username.wait_for(state="visible")
         input_username.focus()
-        input_username.type(self.username)
+        input_username.type(username)
         input_password = self.page.locator("#ed_password")
         input_password.wait_for()
-        input_password.type(self.password)
+        input_password.type(password)
         input_password.press("Enter")
 
         # Account card
