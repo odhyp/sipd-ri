@@ -1,13 +1,8 @@
-<a id="readme-top"></a>
-
 <!-- PROJECT SHIELDS -->
 
-<!-- [![Contributors][contributors-shield]][contributors-url] -->
-<!-- [![Forks][forks-shield]][forks-url] -->
-<!-- [![Issues][issues-shield]][issues-url] -->
-
+[![Forks][forks-shield]][forks-url]
+[![Issues][issues-shield]][issues-url]
 [![Stargazers][stars-shield]][stars-url]
-[![MIT License][license-shield]][license-url]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -20,7 +15,7 @@
   <h3 align="center">SIPD-RI</h3>
 
   <p align="center">
-    A collection of simple Python scripts<br />to help with SIPD-RI and accounting tasks.
+    A simple command-line Python application<br />to help with SIPD-RI and accounting tasks.
     <br />
     <a href="https://github.com/odhyp/sipd-ri"><strong>Explore the docs »</strong></a>
     <br />
@@ -29,32 +24,25 @@
     <a href="https://github.com/odhyp/sipd-ri/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     ·
     <a href="https://github.com/odhyp/sipd-ri/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+    ·
+    <a href="">Donate</a>
   </p>
 </div>
 <br />
 
 <!-- ABOUT THE PROJECT -->
 
-## About The Project
+## About This Project
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `odhyp`, `sipd-ri`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-### Built With
-
-- [![Next][Next.js]][Next-url]
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+This is project description
 
 <!-- GETTING STARTED -->
 
 ## Getting Started
 
 This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
@@ -62,26 +50,8 @@ This is an example of how to list things you need to use the software and how to
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/odhyp/sipd-ri.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = "ENTER YOUR API";
-   ```
-5. Change git remote url to avoid accidental pushes to base project
-   ```sh
-   git remote set-url origin odhyp/sipd-ri
-   git remote -v # confirm the changes
-   ```
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+1. step 1
+2. step 2
 
 <!-- USAGE EXAMPLES -->
 
@@ -90,8 +60,6 @@ This is an example of how to list things you need to use the software and how to
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
 _For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ROADMAP -->
 
@@ -102,20 +70,19 @@ _For more examples, please refer to the [Documentation](https://example.com)_
   - [ ] AKLAP --- Input Jurnal Umum (Penyusutan)
   - [ ] AKLAP --- Posting Jurnal (Approve Jurnal) Belanja
 - ExcelHelper
-  - [ ] compress excel files
-  - [ ] compile Laporan Realisasi
+  - [x] compress excel files
+  - [x] compile Laporan Realisasi
   - [ ] data cleaning Laporan Realisasi Compile
   - [ ] compress file excel (optional)
   - [ ] create LRA Mingguan
   - [ ] create LRA Bulanan
 - Other
+  - [x] add utils.py
   - [ ] remove/change test print and time.sleep
   - [ ] add docstring for class and class methods
-  - [ ] add utils.py
+  - [ ] prettify the print output using `rich`
 
 See the [open issues](https://github.com/odhyp/sipd-ri/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTRIBUTING -->
 
@@ -132,8 +99,6 @@ Don't forget to give the project a star! Thanks again!
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- ### Top contributors:
 
 <a href="https://github.com/odhyp/sipd-ri/graphs/contributors">
@@ -146,28 +111,7 @@ Don't forget to give the project a star! Thanks again!
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- CONTACT -->
-
-## Contact
-
-Odhy Pradhana - []()
-
-Project Link: [https://github.com/odhyp/sipd-ri](https://github.com/odhyp/sipd-ri)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- ACKNOWLEDGMENTS -->
-
-<!-- ## Acknowledgments
-
-- [Odhy Pradhana](https://odhyp.com/)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+<!-- LINKS & IMAGES -->
 
 [contributors-shield]: https://img.shields.io/github/contributors/odhyp/sipd-ri.svg?style=for-the-badge
 [contributors-url]: https://github.com/odhyp/sipd-ri/graphs/contributors
@@ -181,4 +125,4 @@ Project Link: [https://github.com/odhyp/sipd-ri](https://github.com/odhyp/sipd-r
 [license-url]: https://github.com/odhyp/sipd-ri/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: assets/img/product.png
