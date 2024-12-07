@@ -44,9 +44,9 @@ def get_current_time() -> str:
     Get the current time in HH:MM:SS format.
 
     Returns:
-        str: The current time as a string formatted as `HH:MM:SS`.
+        str: The current time as a string formatted as `HH.MM`.
     """
-    return datetime.now().strftime("%H:%M:%S")
+    return datetime.now().strftime("%H.%M")
 
 
 def get_current_date() -> str:
