@@ -1,10 +1,14 @@
 <!-- PROJECT SHIELDS -->
 
-[![Forks][forks-shield]][forks-url]
+<!-- [![Forks][forks-shield]][forks-url] -->
+
 [![Issues][issues-shield]][issues-url]
 [![Stargazers][stars-shield]][stars-url]
+[![License][license-shield]][license-url]
+[![Sponsor][sponsor-shield]][sponsor-url]
 
 <!-- PROJECT LOGO -->
+<br />
 <br />
 <br />
 <div align="center">
@@ -30,36 +34,54 @@
 </div>
 <br />
 
+TODO: update the donate/sponsor links
+
 <!-- ABOUT THE PROJECT -->
 
 ## About This Project
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
+TODO: update the product screenshot
 
-This is project description
+This project helps SIPD-RI users automate repetitive tasks like downloading reports, scraping tables, and performing batch operations such as approving or inputting data. It also offers additional features like compressing and merging Excel files, as well as converting `.xls` files to the newer `.xlsx` format.
 
 <!-- GETTING STARTED -->
 
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
+To get started with this project, you can either run it directly from the source code or use the pre-built `.exe` version for Windows.
 
-### Prerequisites
+### Option 1: Using the Pre-Built `.exe`
 
-This is an example of how to list things you need to use the software and how to install them.
+1. **Download the Latest Release**: Go to the [releases page]() and download the latest `.exe` file for your system.
+2. **Run the Application**: Once downloaded, simply double-click the `.exe` file to launch the app.
 
-### Installation
+### Option 2: Running from Source Code
 
-1. step 1
-2. step 2
+If you prefer to run the app from source, follow these steps:
+
+1. Make sure you have Python 3.6 (or higher) installed. You can download it from the [official Python website](https://www.python.org/downloads/).
+2. Clone the repository to your local machine.
+   ```bash
+    git clone https://github.com/odhyp/sipd-ri.git && cd sipd-ri
+   ```
+3. Install dependencies
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Run the application
+   ```bash
+   python main.py
+   ```
 
 <!-- USAGE EXAMPLES -->
 
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+After launching the application (either by running the `.exe` or via Python), you can start using it to automate tasks.
 
 _For more examples, please refer to the [Documentation](https://example.com)_
+TODO: update the docs url
 
 <!-- ROADMAP -->
 
@@ -122,7 +144,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 [issues-shield]: https://img.shields.io/github/issues/odhyp/sipd-ri.svg?style=for-the-badge
 [issues-url]: https://github.com/odhyp/sipd-ri/issues
 [license-shield]: https://img.shields.io/github/license/odhyp/sipd-ri.svg?style=for-the-badge
-[license-url]: https://github.com/odhyp/sipd-ri/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/linkedin_username
+[license-url]: https://github.com/odhyp/sipd-ri/blob/master/LICENSE
+[sponsor-url]: https://github.com/sponsors/odhyp
+[sponsor-shield]: https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#white
 [product-screenshot]: assets/img/product.png
