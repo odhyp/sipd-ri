@@ -1,2 +1,4 @@
 python-dotenv
 playwright
+pandas
+openpyxl
