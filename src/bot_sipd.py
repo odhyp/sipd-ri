@@ -66,13 +66,11 @@ class SIPDBot:
         btn_account.click()
 
         # CAPTCHA form
-        # TODO: add input() to delay automation after user fill the CAPTCHA form
         self.page.bring_to_front()
+        input("Press Enter after successful login...")
 
         # Sidebar - Akuntansi
-        # TODO: change wait for a more universal element e.g. title
         menu_link = self.page.locator('a:has-text("Akuntansi")').first
-        # TODO: add fail-safe method
         menu_link.wait_for(timeout=120_000)
 
     def login_with_cookies(self):
