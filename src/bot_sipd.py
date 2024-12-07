@@ -1,4 +1,6 @@
-import time
+"""
+A module for automating interactions with SIPD-RI Kemendagri Website.
+"""
 
 import json
 from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
@@ -6,6 +8,14 @@ from src.utils import get_month_name, get_current_date, PathHelper
 
 
 class SIPDBot:
+    """
+    A bot for automating interactions with the SIPD-RI
+
+    To-do List:
+    # TODO: add refresh page method, using locator for reusability
+    # TODO: add reload page method, using locator for reusability
+    """
+
     _URL_LOGIN = "https://sipd.kemendagri.go.id/penatausahaan/login"
     _URL_PENATAUSAHAAN = "https://sipd.kemendagri.go.id/penatausahaan"
     _URL_PENATAUSAHAAN_REALISASI = (
@@ -19,6 +29,19 @@ class SIPDBot:
         self.page = None
 
     def _initialize_browser(self):
+        """
+        Initializes the Playwright browser instance for automation.
+
+        Attributes:
+            self.browser (Browser): The Playwright browser instance.
+            self.context (BrowserContext): The context for managing browser settings and cookies.
+            self.page (Page): The active page within the browser context for navigation and interaction.
+
+        Notes:
+            - The browser is launched in non-headless mode (`headless=False`) to allow visual debugging.
+            - The `--start-maximized` argument ensures the browser opens in maximized mode.
+            - A universal viewport is disabled using `no_viewport=True`.
+        """
         playwright = sync_playwright().start()
         self.browser = playwright.chromium.launch(
             headless=False, args=["--start-maximized"]
@@ -27,6 +50,11 @@ class SIPDBot:
         self.page = self.context.new_page()
 
     def login_manual(self):
+        """
+        Log in to SIPD-RI manually.
+
+        This method navigates to the login page and the user s
+        """
         if not self.page:
             self._initialize_browser()
 
@@ -41,6 +69,24 @@ class SIPDBot:
         menu_link.wait_for(timeout=120_000)
 
     def login_with_env(self, username, password):
+        """
+        Log in to SIPD-RI using the provided credentials in the `.env` file
+
+        This method navigates to the login page, enters the username and password,
+        selects the appropriate account, and handles CAPTCHA verification. The user
+        must manually complete the CAPTCHA before proceeding.
+
+        Args:
+            username (str): The username to log in with.
+            password (str): The password for the specified username.
+
+        Raises:
+            PlaywrightTimeoutError: If any page elements fail to load within the timeout period.
+
+        Notes:
+            - The CAPTCHA must be completed manually. Automation pauses to allow the user to handle it.
+            - A delay may be introduced for bad connections using a fail-safe.
+        """
         if not self.page:
             self._initialize_browser()
 
@@ -74,6 +120,19 @@ class SIPDBot:
         menu_link.wait_for(timeout=120_000)
 
     def login_with_cookies(self):
+        """
+        Log in to SIPD-RI using the previously saved session cookies. It will load
+        cookie file named `cookie.json`.
+
+        Raises:
+            FileNotFoundError: If the `cookies.json` file does not exist.
+            json.JSONDecodeError: If the `cookies.json` file contains invalid JSON.
+
+        Notes:
+            - The method assumes that the `cookies.json` file exists and contains valid cookies.
+            - If the cookies are expired or invalid, the session will not be authenticated successfully.
+
+        """
         if not self.page:
             self._initialize_browser()
 
@@ -92,12 +151,30 @@ class SIPDBot:
             print(f"An unexpected error occurred: {e}")
 
     def close_browser(self):
+        """
+        Safely closes the Playwright browser and its associated context.
+        """
         if self.context:
             self.context.close()
         if self.browser:
             self.browser.close()
 
     def download_realisasi(self, start_month=1, end_month=1):
+        """
+        Downloads realisasi reports for specified months from the SIPD system.
+
+        Args:
+            start_month (int): The starting month (1-12).
+            end_month (int): The ending month (1-12).
+
+        Notes:
+            - Handles potential errors during navigation, element interaction, and downloads.
+            - Downloads reports for each month between `start_month` and `end_month`, inclusive.
+            - Ensures robust handling of unexpected issues, such as timeouts or invalid months.
+
+        Raises:
+            Exception: If a critical error occurs during the process.
+        """
         try:
             self.page.goto(self._URL_PENATAUSAHAAN_REALISASI)
             menu_title = self.page.locator('h1:has-text("Laporan Realisasi")')
@@ -147,7 +224,7 @@ class SIPDBot:
                     except PlaywrightTimeoutError as e:
                         print(f"({i}/{end_month}) --- Download failed: {e}")
                         print("Retrying...")
-                        # Retry logic can be added here if required.
+                        # TODO: Retry logic for failed downloads.
 
                 except IndexError:  # Catching month values > 12
                     print(
