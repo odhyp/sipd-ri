@@ -3,18 +3,17 @@ import time
 
 from src.bot_sipd import SIPDBot
 from src.helper_excel import ExcelHelper
-
-
-def save_cookies():
-    username = os.getenv("SIPD_USERNAME")
-    password = os.getenv("SIPD_PASSWORD")
-
-    bot = SIPDBot()
-    bot.save_cookies(username, password)
+from src.helper_cookies import CookieHelper
 
 
 def download_laporan_realisasi(start_month, end_month):
     bot = SIPDBot()
+
+    if CookieHelper.is_cookies_exist():
+        bot.login_with_cookies()
+    else:
+        bot.login_manual()
+
     bot.download_realisasi(start_month, end_month)
     bot.close_browser()
 
@@ -28,37 +27,59 @@ def menu_clear():
 
 
 def main_menu():
-    while True:
-        menu_clear()
+    try:
+        while True:
+            menu_clear()
 
-        # Main menu
-        print("Main Menu")
-        print("1. Login/save cookies")
-        print("2. Download Laporan Realisasi")
-        print("0. Exit")
+            # MAIN MENU
+            print("----- SIPD-RI Helper by Odhy -----\n")
+            print("1. Login/save cookies")
+            print("2. Download Laporan Realisasi")
+            print("0. Exit")
 
-        choice = input("Enter your choice: ").strip()
+            choice = input("Enter your choice: ").strip()
 
-        # EXIT CODE
-        if choice == "0":
-            print("Exiting the menu. Goodbye!")
-            break
+            # EXIT CODE
+            if choice == "0":
+                print("\nGoodbye!")
+                time.sleep(1)
+                break
 
-        # LOGIN/SAVE COOKIES
-        elif choice == "1":
-            print("----- Save Cookies -----")
-            save_cookies()
+            # LOGIN/SAVE COOKIES
+            if choice == "1":
+                menu_clear()
+                print("----- Save Cookies -----\n")
+                CookieHelper.save_cookies()
 
-        # DOWNLOAD LAPORAN REALIISASI
-        elif choice == "2":
-            print("----- Download Laporan Realisasi -----")
+            # DOWNLOAD LAPORAN REALIISASI
+            elif choice == "2":
+                menu_clear()
+                print("----- Download Laporan Realisasi -----\n")
 
-            start_month = int(input("Start month: "))
-            end_month = int(input("End month: "))
+                try:
+                    start_month = int(input("Start month: "))
+                    end_month = int(input("End month: "))
+                except Exception as e:
+                    print(e)
+                else:
+                    download_laporan_realisasi(start_month, end_month)
+                    menu_return()
 
-            download_laporan_realisasi(start_month, end_month)
-            menu_return()
+            elif choice == "3":
+                menu_clear()
 
-        else:
-            print("\nInvalid choice. Please try again.")
-            input("Press Enter to return to the menu...")
+                menu_return()
+
+            else:
+                print("\nInvalid choice. Please try again.")
+                input("Press Enter to return to the menu...")
+
+    except KeyboardInterrupt:
+        print("\n\nAction canceled")
+        menu_return()
+        main_menu()
+
+    except Exception as e:
+        print(e)
+        menu_return()
+        main_menu()
