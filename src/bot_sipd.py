@@ -63,11 +63,15 @@ class SIPDBot:
         # TODO: add fail-safe method
         menu_link.wait_for(timeout=120_000)
 
-        time.sleep(5)
-        print(">>>>>>>>>>>>>>>>>>>>>>HERE")
+    def login_with_cookies(self):
+        if not self.page:
+            self._initialize_browser()
 
-    def start_browser(self):
-        self._login()
+        with open("cookies.json", "r", encoding="utf-8") as f:
+            cookies = json.load(f)
+            self.context.add_cookies(cookies)
+
+        self.page.goto(self._URL_LOGIN)
 
     def close_browser(self):
         if self.context:
