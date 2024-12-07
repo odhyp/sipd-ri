@@ -38,7 +38,7 @@ class CookieHelper:
         Output:
             cookies.json (file): A JSON file containing the session cookies.
         """
-        url_login = "https://sipd.kemendagri.go.id/penatausahaan/login"
+        url_login = "https://sipd.kemendagri.go.id/penatausahaan/login"  # FIXME: move URL to utils
 
         with sync_playwright() as playwright:
             browser = playwright.chromium.launch(
