@@ -17,9 +17,7 @@ def get_month_name(index) -> str:
 
     Returns:
         str: The name of the month in Indonesian.
-
-    Raises:
-        IndexError: If the index is outside the range 1-12.
+        None: If the index is outside the range 1-12.
     """
     month_list = [
         "Januari",
@@ -35,7 +33,10 @@ def get_month_name(index) -> str:
         "November",
         "Desember",
     ]
-    return month_list[index - 1]
+    try:
+        return month_list[index - 1]
+    except IndexError:
+        return None
 
 
 def get_current_time() -> str:
