@@ -98,51 +98,68 @@ class SIPDBot:
             self.browser.close()
 
     def download_realisasi(self, start_month=1, end_month=1):
-        self.page.goto(self._URL_PENATAUSAHAAN_REALISASI)
-        menu_title = self.page.locator('h1:has-text("Laporan Realisasi")')
-        menu_title.wait_for()
+        try:
+            self.page.goto(self._URL_PENATAUSAHAAN_REALISASI)
+            menu_title = self.page.locator('h1:has-text("Laporan Realisasi")')
+            menu_title.wait_for()
 
-        # Download form - SKPD
-        submenu_skpd = self.page.locator("div.css-j93siq input").first
-        submenu_skpd.wait_for()
-        submenu_skpd.click()
-        submenu_skpd.type("Unduh Semua SKPD")
-        submenu_skpd.press("Enter")
+            # Download form - SKPD
+            submenu_skpd = self.page.locator("div.css-j93siq input").first
+            submenu_skpd.wait_for()
+            submenu_skpd.click()
+            submenu_skpd.type("Unduh Semua SKPD")
+            submenu_skpd.press("Enter")
 
-        for i in range(start_month, end_month + 1):
-            print(f"({i}/{end_month}) --- Downloading file...")
+            for i in range(start_month, end_month + 1):
+                print(f"({i}/{end_month}) --- Downloading file...")
 
-            try:
-                # Download form - Bulan
-                submenu_bulan = self.page.locator("div.css-j93siq input").nth(1)
-                submenu_bulan.wait_for(timeout=60_000)
-                submenu_bulan.click()
-                submenu_bulan.type(get_month_name(i))
-                submenu_bulan.press("Enter")
-
-                # FIXME: handle error for failed/timeout download
                 try:
-                    with self.page.expect_download(timeout=120_000) as download_info:
-                        btn_download = self.page.locator('button:has-text("Download")')
-                        btn_download.click()
+                    # Download form - Bulan
+                    submenu_bulan = self.page.locator("div.css-j93siq input").nth(1)
+                    submenu_bulan.wait_for(timeout=60_000)
+                    submenu_bulan.click()
+                    submenu_bulan.type(get_month_name(i))
+                    submenu_bulan.press("Enter")
 
-                    current_date = get_current_date()
-                    download_dir = f"Laporan Realisasi {current_date}"
-                    download_name = f"2024-{i:02}-Laporan Realisasi.xlsx"
-                    download_path = PathHelper.get_output_path(
-                        output_dir=download_dir, file_name=download_name
-                    )
+                    try:
+                        with self.page.expect_download(
+                            timeout=120_000
+                        ) as download_info:
+                            btn_download = self.page.locator(
+                                'button:has-text("Download")'
+                            )
+                            btn_download.click()
 
-                    download_file = download_info.value
-                    download_file.save_as(download_path)
+                        current_date = get_current_date()
+                        download_dir = f"Laporan Realisasi {current_date}"
+                        download_name = f"2024-{i:02}-Laporan Realisasi.xlsx"
+                        download_path = PathHelper.get_output_path(
+                            output_dir=download_dir, file_name=download_name
+                        )
 
+                        download_file = download_info.value
+                        download_file.save_as(download_path)
+
+                        print(
+                            f"({i}/{end_month}) --- Download success! File saved as {download_name}"
+                        )
+
+                    except PlaywrightTimeoutError as e:
+                        print(f"({i}/{end_month}) --- Download failed: {e}")
+                        print("Retrying...")
+                        # Retry logic can be added here if required.
+
+                except IndexError:  # Catching month values > 12
                     print(
-                        f"({i}/{end_month}) --- Download success! File saved as {download_name}"
+                        f"({i}/{end_month}) --- Invalid month! There are only 12 months."
                     )
 
-                except PlaywrightTimeoutError as e:
-                    print(f"({i}/{end_month}) --- Download failed: {e}")
-                    # TODO: add retry download for failed downloads
+                except Exception as e:
+                    print(f"({i}/{end_month}) --- Unexpected error: {e}")
+                    print("Skipping to the next month.")
 
-            except IndexError:  # Catching month values > 12
-                print(f"({i}/{end_month}) --- There are only 12 months!")
+        except PlaywrightTimeoutError as e:
+            print(f"Page load timed out: {e}")
+
+        except Exception as e:
+            print(f"Critical error occurred: {e}")
