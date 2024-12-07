@@ -77,11 +77,19 @@ class SIPDBot:
         if not self.page:
             self._initialize_browser()
 
-        with open("cookies.json", "r", encoding="utf-8") as f:
-            cookies = json.load(f)
-            self.context.add_cookies(cookies)
+        try:
+            with open("cookies.json", "r", encoding="utf-8") as f:
+                cookies = json.load(f)
+                self.context.add_cookies(cookies)
 
-        self.page.goto(self._URL_LOGIN)
+            self.page.goto(self._URL_LOGIN)
+
+        except FileNotFoundError:
+            print("Error: cookies.json file not found. Please save cookies first.")
+        except json.JSONDecodeError:
+            print("Error: Invalid JSON format. Please re-save cookies!")
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
 
     def close_browser(self):
         if self.context:
