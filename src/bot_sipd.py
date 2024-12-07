@@ -26,10 +26,21 @@ class SIPDBot:
         self.context = self.browser.new_context(no_viewport=True)
         self.page = self.context.new_page()
 
-    # TODO: add refresh page method, using locator for reusability
-    # TODO: add reload page method, using locator for reusability
+    def login_manual(self):
+        if not self.page:
+            self._initialize_browser()
 
-    def _login(self):
+        self.page.goto(self._URL_LOGIN, timeout=120_000)
+        self.page.bring_to_front()
+
+        print("Please fill the login and CAPTCHA form")
+        print("Only continue after successfully logged in!")
+        input("\nPress Enter to continue...")
+
+        menu_link = self.page.locator('a:has-text("Akuntansi")').first
+        menu_link.wait_for(timeout=120_000)
+
+    def login_with_env(self, username, password):
         if not self.page:
             self._initialize_browser()
 
