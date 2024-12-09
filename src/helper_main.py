@@ -27,6 +27,10 @@ def menu_clear():
 
 
 def main_menu():
+    # TODO: add browser close/exit after in `finally` under try-except statement
+
+    # Wrap every choices with try-except-else-finally, make sure to close the browser after successful/failed
+    # session. Use output_path and file naming here instead of hard-coded in the imported methods.
     try:
         while True:
             menu_clear()

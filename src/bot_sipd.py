@@ -174,6 +174,9 @@ class SIPDBot:
 
         Raises:
             Exception: If a critical error occurs during the process.
+
+        To-do:
+            - [ ] add output_path parameter
         """
         try:
             self.page.goto(self._URL_PENATAUSAHAAN_REALISASI)
