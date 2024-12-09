@@ -38,7 +38,7 @@ TODO: update the donate/sponsor links
 
 <!-- ABOUT THE PROJECT -->
 
-## About This Project
+## 🏖️ About This Project
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 TODO: update the product screenshot
@@ -47,7 +47,7 @@ This project helps SIPD-RI users automate repetitive tasks like downloading repo
 
 <!-- GETTING STARTED -->
 
-## Getting Started
+## 👍 Getting Started
 
 To get started with this project, you can either run it directly from the source code or use the pre-built `.exe` version for Windows.
 
@@ -76,7 +76,7 @@ If you prefer to run the app from source, follow these steps:
 
 <!-- USAGE EXAMPLES -->
 
-## Usage
+## 📙 Usage
 
 After launching the application (either by running the `.exe` or via Python), you can start using it to automate tasks.
 
@@ -85,7 +85,7 @@ TODO: update the docs url
 
 <!-- ROADMAP -->
 
-## Roadmap
+## 🗺️ Roadmap
 
 - SIPDBot
   - [x] Penatausahaan --- Download Realisasi for given month(s)
@@ -108,7 +108,7 @@ See the [open issues](https://github.com/odhyp/sipd-ri/issues) for a full list o
 
 <!-- CONTRIBUTING -->
 
-## Contributing
+## 💌 Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
@@ -129,7 +129,7 @@ Don't forget to give the project a star! Thanks again!
 
 <!-- LICENSE -->
 
-## License
+## 😃 License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
