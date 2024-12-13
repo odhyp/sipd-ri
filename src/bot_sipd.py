@@ -68,10 +68,7 @@ class SIPDBot:
 
         This method navigates to the login page and the user s
         """
-        if not self.page:
-            self._initialize_browser()
-
-        self.page.goto(self._URL_LOGIN, timeout=120_000)
+        self.page.goto(self.URL_LOGIN, timeout=120_000)
         self.page.bring_to_front()
 
         print("Please fill the login and CAPTCHA form")
@@ -100,11 +97,8 @@ class SIPDBot:
             - The CAPTCHA must be completed manually. Automation pauses to allow the user to handle it.
             - A delay may be introduced for bad connections using a fail-safe.
         """
-        if not self.page:
-            self._initialize_browser()
-
         # TODO: add fail-safe for bad connection
-        self.page.goto(self._URL_LOGIN, timeout=120_000)
+        self.page.goto(self.URL_LOGIN, timeout=120_000)
 
         # Login Form
         input_username = self.page.locator("#ed_username")
@@ -146,15 +140,12 @@ class SIPDBot:
             - If the cookies are expired or invalid, the session will not be authenticated successfully.
 
         """
-        if not self.page:
-            self._initialize_browser()
-
         try:
             with open("cookies.json", "r", encoding="utf-8") as f:
                 cookies = json.load(f)
                 self.context.add_cookies(cookies)
 
-            self.page.goto(self._URL_LOGIN)
+            self.page.goto(self.URL_LOGIN)
 
         except FileNotFoundError:
             print("Error: cookies.json file not found. Please save cookies first.")
@@ -192,7 +183,10 @@ class SIPDBot:
             - [ ] add output_path parameter
         """
         try:
-            self.page.goto(self._URL_PENATAUSAHAAN_REALISASI)
+            url = (
+                self.URL_PENATAUSAHAAN + "/penatausahaan/pengeluaran/laporan/realisasi"
+            )
+            self.page.goto(url)
             menu_title = self.page.locator('h1:has-text("Laporan Realisasi")')
             menu_title.wait_for()
 
