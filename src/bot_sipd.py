@@ -16,12 +16,9 @@ class SIPDBot:
     # TODO: add reload page method, using locator for reusability
     """
 
-    _URL_LOGIN = "https://sipd.kemendagri.go.id/penatausahaan/login"
-    _URL_PENATAUSAHAAN = "https://sipd.kemendagri.go.id/penatausahaan"
-    _URL_PENATAUSAHAAN_REALISASI = (
-        f"{_URL_PENATAUSAHAAN}/penatausahaan/pengeluaran/laporan/realisasi"
-    )
-    _URL_AKLAP = "https://sipd.kemendagri.go.id/penatausahaan/aklap"
+    URL_LOGIN = "https://sipd.kemendagri.go.id/penatausahaan/login"
+    URL_PENATAUSAHAAN = "https://sipd.kemendagri.go.id/penatausahaan"
+    URL_AKLAP = "https://sipd.kemendagri.go.id/penatausahaan/aklap"
 
     def __init__(self):
         self.browser = None
