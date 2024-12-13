@@ -24,10 +24,11 @@ class SIPDBot:
         self.browser = None
         self.context = None
         self.page = None
+        self.playwright = None
 
-    def _initialize_browser(self):
+    def __enter__(self):
         """
-        Initializes the Playwright browser instance for automation.
+        Initializes the browser and page when entering the context.
 
         Attributes:
             self.browser (Browser): The Playwright browser instance.
@@ -39,12 +40,27 @@ class SIPDBot:
             - The `--start-maximized` argument ensures the browser opens in maximized mode.
             - A universal viewport is disabled using `no_viewport=True`.
         """
-        playwright = sync_playwright().start()
-        self.browser = playwright.chromium.launch(
+        self.playwright = sync_playwright().start()
+        self.browser = self.playwright.chromium.launch(
             headless=False, args=["--start-maximized"]
         )
         self.context = self.browser.new_context(no_viewport=True)
         self.page = self.context.new_page()
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        """
+        Closes the browser and cleans up resources when exiting the context.
+        """
+        if self.context:
+            self.context.close()
+        if self.browser:
+            self.browser.close()
+        if self.playwright:
+            self.playwright.stop()
+
+    def login(self):
+        pass
 
     def login_manual(self):
         """
