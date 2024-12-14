@@ -192,15 +192,6 @@ class SIPDBot:
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
 
-    def close_browser(self):
-        """
-        Safely closes the Playwright browser and its associated context.
-        """
-        if self.context:
-            self.context.close()
-        if self.browser:
-            self.browser.close()
-
     def download_realisasi(self, start_month=1, end_month=1):
         """
         Downloads realisasi reports for specified months from the SIPD system.
