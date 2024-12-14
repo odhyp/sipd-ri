@@ -6,6 +6,7 @@ from rich.panel import Panel
 from rich.progress import Progress
 from rich.table import Table
 from rich.text import Text
+from rich.traceback import Traceback
 
 from src.bot_sipd import SIPDBot
 from src.helper_excel import ExcelHelper
@@ -114,25 +115,35 @@ def menu_table():
 def run_app():
     console = Console()
 
-    while True:
-        menu_clear()
-        menu_title()
-        menu_table()
-
-        choice = input("\n> ")
-
-        # 1 - Save Cookies
-        if choice == "1":
+    try:
+        while True:
             menu_clear()
             menu_title()
-            save_cookies()
+            menu_table()
 
-        # 0 - Exit
-        elif choice == "0":
-            console.print("> :wave: [bold cyan]Good bye...[/bold cyan]")
-            time.sleep(2)
-            break
+            choice = input("\n> ")
 
-        else:
-            console.print("> :warning:  [red]Invalid choice![/red] Please try again.")
-            menu_return()
+            # 1 - Save Cookies
+            if choice == "1":
+                menu_clear()
+                menu_title()
+                save_cookies()
+
+            # 0 - Exit
+            elif choice == "0":
+                console.print("> :wave: [bold cyan]Good bye...[/bold cyan]")
+                time.sleep(2)
+                break
+
+            else:
+                console.print(
+                    "> :warning:  [red]Invalid choice![/red] Please try again."
+                )
+                menu_return()
+
+    except KeyboardInterrupt:
+        console.print("\n> :wave: [bold cyan]Good bye...[/bold cyan]")
+        time.sleep(2)
+
+    except Exception:
+        console.print(Traceback())
