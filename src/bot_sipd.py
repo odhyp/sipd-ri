@@ -185,10 +185,10 @@ class SIPDBot:
 
             self.page.goto(self.URL_LOGIN)
 
-        except FileNotFoundError:
-            print("Error: cookies.json file not found. Please save cookies first.")
         except json.JSONDecodeError:
-            print("Error: Invalid JSON format. Please re-save cookies!")
+            # For expired or invalid session cookie.
+            os.remove("cookies.json")
+            self.login()
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
 
