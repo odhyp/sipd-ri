@@ -62,6 +62,27 @@ class SIPDBot:
         if self.playwright:
             self.playwright.stop()
 
+    def reload_page(self):
+        """
+        Reloads the current page from the server.
+        """
+        current_url = self.page.url
+        self.page.goto(current_url)
+
+    def is_404(self) -> bool:
+        """
+        Check if the current page is "404 - Page not found" page.
+
+        Returns:
+            bool: True if it's 404 page, False otherwise.
+        """
+        try:
+            page_404 = self.page.locator('h1:has-text("404")')
+            page_404.wait_for(timeout=5_000)
+            return True
+        except Exception:
+            return False
+
     @staticmethod
     def is_cookies_exist(cookie_file="cookies.json") -> bool:
         """
