@@ -82,16 +82,19 @@ class SIPDBot:
         Output:
             cookies.json (file): A JSON file containing the session cookies.
         """
-        self.page.goto(self.URL_LOGIN, timeout=120_000)
-        self.page.bring_to_front()
-        self.page.wait_for_url("**/dashboard")
-
         cookies = self.context.cookies()
         with open("cookies.json", "w", encoding="utf-8") as f:
             json.dump(cookies, f)
 
     def login(self):
-        pass
+        """
+        Log in to SIPD-RI
+        """
+        if self.is_cookies_exist():
+            self.login_with_cookies()
+        else:
+            self.login_manual()
+            self.save_cookies()
 
     def login_manual(self):
         """
