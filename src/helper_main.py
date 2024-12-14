@@ -1,89 +1,138 @@
 import os
 import time
 
+from rich.console import Console
+from rich.panel import Panel
+from rich.progress import Progress
+from rich.table import Table
+from rich.text import Text
+
 from src.bot_sipd import SIPDBot
 from src.helper_excel import ExcelHelper
-from src.helper_cookies import CookieHelper
+
+
+def save_cookies():
+    with Progress() as progress:
+        task = progress.add_task("[green]Saving cookies...", total=100)
+
+        progress.update(task, advance=20, description="Checking cookie existence")
+        if SIPDBot.is_cookies_exist():
+            os.remove("cookies.json")
+            progress.update(task, advance=20, description="Removing old cookies")
+
+        progress.update(task, advance=20, description="Logging in")
+        with SIPDBot() as bot:
+            bot.login()
+        progress.update(task, advance=40, description="Cookie saved!")
+
+    menu_return()
 
 
 def download_laporan_realisasi(start_month, end_month):
-    bot = SIPDBot()
-
-    if CookieHelper.is_cookies_exist():
-        bot.login_with_cookies()
-    else:
-        bot.login_manual()
-
-    bot.download_realisasi(start_month, end_month)
-    bot.close_browser()
+    with SIPDBot() as bot:
+        bot.login()
+        bot.download_realisasi(start_month, end_month)
 
 
-def menu_return():
-    return input("\nPress Enter to return to the menu...")
+def input_jurnal_umum():
+    with SIPDBot() as bot:
+        pass
+
+
+# --------------------------------------------------
 
 
 def menu_clear():
-    os.system("cls" if os.name == "nt" else "clear")
+    console = Console()
+    console.clear()
 
 
-def main_menu():
-    # TODO: add browser close/exit after in `finally` under try-except statement
+def menu_return():
+    console = Console()
+    console.print("\n> Press Enter to continue...", style="dim")
+    input()
 
-    # Wrap every choices with try-except-else-finally, make sure to close the browser after successful/failed
-    # session. Use output_path and file naming here instead of hard-coded in the imported methods.
-    try:
-        while True:
+
+def menu_title():
+    console = Console()
+
+    # Title and version
+    console.print(
+        Text("SIPD-RI Helper", style="bold cyan"),
+        Text("ver 0.1.0", style="bold white"),
+    )
+
+    # Author
+    console.print(
+        Text("By Odhy Pradhana -", style="italic dim"),
+        Text("odhyp.com", style="underline dim"),
+        "\n",
+    )
+
+
+def menu_table():
+    console = Console()
+    table = Table(show_header=False, show_edge=False, show_lines=False, box=None)
+
+    # Coming Soon
+    coming_soon = "[dim italic] - Coming soon :hammer:[/dim italic]"
+
+    # Table Header
+    table.add_column("Menu", style="bold red", justify="right")
+    table.add_column("Function", style="white")
+
+    # Save cookies
+    table.add_row("1", "Save cookies [dim](Please refresh cookies everyday!)[/dim]")
+    table.add_row()
+
+    # Akuntansi
+    table.add_row(":money_bag:", Text("Akuntansi", style="green bold"))
+    table.add_row("a1", "Input Jurnal Umum")
+    table.add_row("a2", f"Posting Jurnal{coming_soon}")
+    table.add_row("a3", f"Input Saldo Awal{coming_soon}")
+    table.add_row()
+
+    # Penatausahaan
+    table.add_row(":smile:", Text("Penatausahaan", style="green bold"))
+    table.add_row("b1", "Download Laporan Realisasi")
+    table.add_row("b2", f"Scrape BKU Pajak{coming_soon}")
+    table.add_row()
+
+    # Misc.
+    table.add_row(":wrench:", Text("Miscellaneous", style="green bold"))
+    table.add_row("c1", f"Compile Excel{coming_soon}")
+    table.add_row("c2", f"Clean Excel{coming_soon}")
+    table.add_row("c3", f"Convert .xls to .xlsx{coming_soon}")
+    table.add_row()
+
+    # Exit
+    table.add_row("0", "Exit")
+
+    console.print(table)
+
+
+def run_app():
+    console = Console()
+
+    while True:
+        menu_clear()
+        menu_title()
+        menu_table()
+
+        choice = input("\n> ")
+
+        # 1 - Save Cookies
+        if choice == "1":
             menu_clear()
+            menu_title()
+            save_cookies()
 
-            # MAIN MENU
-            print("----- SIPD-RI Helper by Odhy -----\n")
-            print("1. Login/save cookies")
-            print("2. Download Laporan Realisasi")
-            print("0. Exit")
+        # 0 - Exit
+        elif choice == "0":
+            console.print("> :wave: [bold cyan]Good bye...[/bold cyan]")
+            time.sleep(2)
+            break
 
-            choice = input("Enter your choice: ").strip()
-
-            # EXIT CODE
-            if choice == "0":
-                print("\nGoodbye!")
-                time.sleep(1)
-                break
-
-            # LOGIN/SAVE COOKIES
-            if choice == "1":
-                menu_clear()
-                print("----- Save Cookies -----\n")
-                CookieHelper.save_cookies()
-
-            # DOWNLOAD LAPORAN REALIISASI
-            elif choice == "2":
-                menu_clear()
-                print("----- Download Laporan Realisasi -----\n")
-
-                try:
-                    start_month = int(input("Start month: "))
-                    end_month = int(input("End month: "))
-                except Exception as e:
-                    print(e)
-                else:
-                    download_laporan_realisasi(start_month, end_month)
-                    menu_return()
-
-            elif choice == "3":
-                menu_clear()
-
-                menu_return()
-
-            else:
-                print("\nInvalid choice. Please try again.")
-                input("Press Enter to return to the menu...")
-
-    except KeyboardInterrupt:
-        print("\n\nAction canceled")
-        menu_return()
-        main_menu()
-
-    except Exception as e:
-        print(e)
-        menu_return()
-        main_menu()
+        else:
+            console.print("> :warning:  [red]Invalid choice![/red] Please try again.")
+            menu_return()
