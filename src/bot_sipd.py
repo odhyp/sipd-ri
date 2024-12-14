@@ -306,3 +306,87 @@ class SIPDBot:
 
         except Exception as e:
             print(f"Critical error occurred: {e}")
+
+    def input_jurnal_umum(self):
+        """
+        Steps:
+
+        - Masuk ke menu Jurnal Umum
+        - Pilih sub-menu Input Jurnal Umum
+        - User input secara manual:
+            - Pilih SKPD
+            - Tanggal Jurnal
+            - Tanggal Dokumen Sumber
+            - No. Dokumen Sumber
+            - Unggah Dokumen Sumber
+            - Keterangan
+        - Isi drop-down Kode Rekening dengan "type" (bukan click atau fill)
+        - Wait sampai akunnya muncul
+        - Isi Debit atau Kredit
+        - Klik tambah
+        - Klik simpan manual oleh user
+        """
+        print(">>>>>>>>>>>>> START TEST")
+        print(">>>>>>>>>>>>> Input Jurnal Umum")
+
+        try:
+            self.page.goto(self.URL_AKLAP)
+            while self.is_404():
+                self.page.goto(self.URL_AKLAP)
+
+            # Menu
+            menu_jurnal_umum = self.page.locator('a:has-text("Jurnal Umum")').first
+            menu_jurnal_umum.wait_for()
+            menu_jurnal_umum.click()
+
+            # Sub-menu
+            submenu_jurnal_umum = self.page.locator(
+                'a:has-text("Input Jurnal Umum")'
+            ).first
+            submenu_jurnal_umum.wait_for()
+            submenu_jurnal_umum.click()
+
+            # Delay for user input
+            input("Press Enter to continue...")
+
+            # Input - Kode Rekening
+            kode_rek_id = "#__BVID__225"
+
+            kode_rek_form = self.page.locator(f"{kode_rek_id} input")
+            kode_rek_form.scroll_into_view_if_needed()
+            kode_rek_form.click()
+            kode_rek_form.type("5.2.01")
+
+            btn_next = self.page.locator(f'{kode_rek_id} button:has-text("Next")')
+            btn_next.wait_for()
+
+            kode_rek_form.press("Enter")
+
+            # Input - Debit/Kredit
+            debit_id = "#__BVID__230"
+            kredit_id = "#__BVID__232"
+
+            debit_form = self.page.locator(f"{debit_id} input")
+            debit_form.click()
+            debit_form.type("26348500")
+
+            # --------- TEST
+            input("Cek debit/kredit")
+            debit_form.clear()
+            # --------- TEST
+
+            kredit_form = self.page.locator(f"{kredit_id} input")
+            kredit_form.click()
+            kredit_form.type("123500")
+
+            # Tambah
+            tambah_id = "#__BVID__235"
+            btn_tambah = self.page.locator(f'{tambah_id} button:has-text("Tambah")')
+            btn_tambah.click()
+
+            input(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> HERE")
+
+        except Exception as e:
+            print(e)
+
+        print(">>>>>>>>>>>>> END TEST")
