@@ -18,7 +18,7 @@ class SIPDBot:
 
     URL_LOGIN = "https://sipd.kemendagri.go.id/penatausahaan/login"
     URL_PENATAUSAHAAN = "https://sipd.kemendagri.go.id/penatausahaan"
-    URL_AKLAP = "https://sipd.kemendagri.go.id/penatausahaan/aklap"
+    URL_AKLAP = "https://peta.sipd.kemendagri.go.id/aklapv2/"
 
     def __init__(self):
         self.browser = None
