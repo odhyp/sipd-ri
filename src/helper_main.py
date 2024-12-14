@@ -1,6 +1,7 @@
 import os
 import time
 
+from rich import box
 from rich.console import Console
 from rich.panel import Panel
 from rich.progress import Progress
@@ -67,16 +68,18 @@ def menu_title():
     console.print(
         Text("By Odhy Pradhana -", style="italic dim"),
         Text("odhyp.com", style="underline dim"),
-        "\n",
+        "\n\n",
     )
 
 
 def menu_table():
     console = Console()
-    table = Table(show_header=False, show_edge=False, show_lines=False, box=None)
+    table = Table(
+        show_header=True, show_edge=False, show_lines=False, box=box.HORIZONTALS
+    )
 
     # Coming Soon
-    coming_soon = "[dim italic] - Coming soon :hammer:[/dim italic]"
+    coming_soon = " - :warning:  [italic]On Progress[/italic]"
 
     # Table Header
     table.add_column("Menu", style="bold red", justify="right")
@@ -87,23 +90,23 @@ def menu_table():
     table.add_row()
 
     # Akuntansi
-    table.add_row(":money_bag:", Text("Akuntansi", style="green bold"))
-    table.add_row("a1", "Input Jurnal Umum")
-    table.add_row("a2", f"Posting Jurnal{coming_soon}")
-    table.add_row("a3", f"Input Saldo Awal{coming_soon}")
+    table.add_row("", Text("Akuntansi", style="green bold"))
+    table.add_row("a1", "Posting Jurnal")
+    table.add_row("a2", "Input Jurnal Umum")
+    table.add_row("a3", f"Input Saldo Awal{coming_soon}", style="dim")
     table.add_row()
 
     # Penatausahaan
-    table.add_row(":smile:", Text("Penatausahaan", style="green bold"))
+    table.add_row("", Text("Penatausahaan", style="green bold"))
     table.add_row("b1", "Download Laporan Realisasi")
-    table.add_row("b2", f"Scrape BKU Pajak{coming_soon}")
+    table.add_row("b2", f"Scrape BKU Pajak{coming_soon}", style="dim")
     table.add_row()
 
     # Misc.
-    table.add_row(":wrench:", Text("Miscellaneous", style="green bold"))
-    table.add_row("c1", f"Compile Excel{coming_soon}")
-    table.add_row("c2", f"Clean Excel{coming_soon}")
-    table.add_row("c3", f"Convert .xls to .xlsx{coming_soon}")
+    table.add_row("", Text("Miscellaneous", style="green bold"))
+    table.add_row("c1", f"Compile Excel{coming_soon}", style="dim")
+    table.add_row("c2", f"Clean Excel{coming_soon}", style="dim")
+    table.add_row("c3", f"Convert .xls to .xlsx{coming_soon}", style="dim")
     table.add_row()
 
     # Exit
@@ -132,7 +135,7 @@ def run_app():
             # 0 - Exit
             elif choice == "0":
                 console.print("> :wave: [bold cyan]Good bye...[/bold cyan]")
-                time.sleep(2)
+                time.sleep(1)
                 break
 
             else:
@@ -143,7 +146,7 @@ def run_app():
 
     except KeyboardInterrupt:
         console.print("\n> :wave: [bold cyan]Good bye...[/bold cyan]")
-        time.sleep(2)
+        time.sleep(1)
 
     except Exception:
         console.print(Traceback())
