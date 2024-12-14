@@ -59,6 +59,38 @@ class SIPDBot:
         if self.playwright:
             self.playwright.stop()
 
+    @staticmethod
+    def is_cookies_exist(cookie_file="cookies.json") -> bool:
+        """
+        Checks if the specified cookie file exists.
+
+        Args:
+            cookie_file (str, optional): The name of the cookie file to check. Defaults to "cookies.json".
+
+        Returns:
+            bool: True if the cookie file exists, False otherwise.
+        """
+        return os.path.exists(cookie_file)
+
+    def save_cookies(self):
+        """
+        Save current session cookies after a successful login attempt.
+
+        User need to manually fill the login and CAPTCHA form. After a successful login,
+        press Enter to continue and save the cookies.
+
+        Output:
+            cookies.json (file): A JSON file containing the session cookies.
+        """
+        self.page.goto(self.URL_LOGIN, timeout=120_000)
+        self.page.bring_to_front()
+
+        # FIXME: add wait for element in landing page, then continue saving the cookie
+
+        cookies = self.context.cookies()
+        with open("cookies.json", "w", encoding="utf-8") as f:
+            json.dump(cookies, f)
+
     def login(self):
         pass
 
