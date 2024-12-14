@@ -33,10 +33,12 @@ class SIPDBot:
         Attributes:
             self.browser (Browser): The Playwright browser instance.
             self.context (BrowserContext): The context for managing browser settings and cookies.
-            self.page (Page): The active page within the browser context for navigation and interaction.
+            self.page (Page): The active page within the browser context for navigation and
+                              interaction.
 
         Notes:
-            - The browser is launched in non-headless mode (`headless=False`) to allow visual debugging.
+            - The browser is launched in non-headless mode (`headless=False`) to allow visual
+              debugging.
             - The `--start-maximized` argument ensures the browser opens in maximized mode.
             - A universal viewport is disabled using `no_viewport=True`.
         """
@@ -65,7 +67,8 @@ class SIPDBot:
         Checks if the specified cookie file exists.
 
         Args:
-            cookie_file (str, optional): The name of the cookie file to check. Defaults to "cookies.json".
+            cookie_file (str, optional): The name of the cookie file to check.
+            Defaults to "cookies.json".
 
         Returns:
             bool: True if the cookie file exists, False otherwise.
@@ -88,7 +91,7 @@ class SIPDBot:
 
     def login(self):
         """
-        Log in to SIPD-RI
+        Log in to SIPD-RI. Log in method is picked based on the existence of session cookie file.
         """
         if self.is_cookies_exist():
             self.login_with_cookies()
@@ -100,7 +103,8 @@ class SIPDBot:
         """
         Log in to SIPD-RI manually.
 
-        This method navigates to the login page and the user s
+        This method navigates to the login page and the user fill the login
+        credentials manually.
         """
         self.page.goto(self.URL_LOGIN, timeout=120_000)
         self.page.bring_to_front()
@@ -117,18 +121,20 @@ class SIPDBot:
         Log in to SIPD-RI using the provided credentials in the `.env` file
 
         This method navigates to the login page, enters the username and password,
-        selects the appropriate account, and handles CAPTCHA verification. The user
-        must manually complete the CAPTCHA before proceeding.
+        and then selects the appropriate account. The user must manually complete the
+        CAPTCHA before proceeding.
 
         Args:
             username (str): The username to log in with.
             password (str): The password for the specified username.
 
         Raises:
-            PlaywrightTimeoutError: If any page elements fail to load within the timeout period.
+            PlaywrightTimeoutError: If any page elements fail to load within the
+            timeout period.
 
         Notes:
-            - The CAPTCHA must be completed manually. Automation pauses to allow the user to handle it.
+            - The CAPTCHA must be completed manually. Automation pauses to allow the
+              user to handle it.
             - A delay may be introduced for bad connections using a fail-safe.
         """
         # TODO: add fail-safe for bad connection
@@ -171,7 +177,8 @@ class SIPDBot:
 
         Notes:
             - The method assumes that the `cookies.json` file exists and contains valid cookies.
-            - If the cookies are expired or invalid, the session will not be authenticated successfully.
+            - If the cookies are expired or invalid, the session will not be authenticated
+              successfully.
 
         """
         try:
@@ -202,6 +209,7 @@ class SIPDBot:
         Downloads realisasi reports for specified months from the SIPD system.
 
         Args:
+            output_dir (str): The output directory where the file will be saved
             start_month (int): The starting month (1-12).
             end_month (int): The ending month (1-12).
 
@@ -251,6 +259,7 @@ class SIPDBot:
                             )
                             btn_download.click()
 
+                        # FIXME: remove the output_dir naming, use the parameter instead
                         current_date = get_current_date()
                         download_dir = f"Laporan Realisasi {current_date}"
                         download_name = f"2024-{i:02}-Laporan Realisasi.xlsx"
