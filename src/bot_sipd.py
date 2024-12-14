@@ -108,10 +108,7 @@ class SIPDBot:
         """
         self.page.goto(self.URL_LOGIN, timeout=120_000)
         self.page.bring_to_front()
-
-        print("Please fill the login and CAPTCHA form")
-        print("Only continue after successfully logged in!")
-        input("\nPress Enter to continue...")
+        self.page.wait_for_url("**/dashboard", timeout=300_000)
 
         menu_link = self.page.locator('a:has-text("Akuntansi")').first
         menu_link.wait_for(timeout=120_000)
