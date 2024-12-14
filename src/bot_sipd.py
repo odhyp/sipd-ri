@@ -84,8 +84,7 @@ class SIPDBot:
         """
         self.page.goto(self.URL_LOGIN, timeout=120_000)
         self.page.bring_to_front()
-
-        # FIXME: add wait for element in landing page, then continue saving the cookie
+        self.page.wait_for_url("**/dashboard")
 
         cookies = self.context.cookies()
         with open("cookies.json", "w", encoding="utf-8") as f:
