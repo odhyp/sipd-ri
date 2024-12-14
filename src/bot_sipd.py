@@ -184,7 +184,9 @@ class SIPDBot:
                 cookies = json.load(f)
                 self.context.add_cookies(cookies)
 
-            self.page.goto(self.URL_LOGIN)
+            self.page.goto(self.URL_LOGIN, timeout=120_000)
+            self.page.bring_to_front()
+            self.page.wait_for_url("**/dashboard", timeout=300_000)
 
         except json.JSONDecodeError:
             # For expired or invalid session cookie.
