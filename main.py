@@ -1,5 +1,5 @@
 """
-A helper script for SIPD-RI by Odhy Pradhana
+A simple command-line app for SIPD-RI tasks by Odhy Pradhana
 """
 
 from src.helper_main import run_app
