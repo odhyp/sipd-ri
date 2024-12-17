@@ -2,15 +2,15 @@
 A helper script for SIPD-RI by Odhy Pradhana
 """
 
-from src.helper_main import main_menu
+from src.helper_main import run_app
 
 
 def main():
     """
     The entry point of the program.
-    Calls the `main_menu` function to initialize the application's main menu.
+    Calls the `run_app` function to initialize the application's main menu.
     """
-    main_menu()
+    run_app()
 
 
 if __name__ == "__main__":
