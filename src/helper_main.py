@@ -21,6 +21,8 @@ def save_cookies():
         if SIPDBot.is_cookies_exist():
             os.remove("cookies.json")
             progress.update(task, advance=20, description="Removing old cookies")
+        else:
+            progress.update(task, advance=20, description="Cookie not found")
 
         progress.update(task, advance=20, description="Logging in")
         with SIPDBot() as bot:
