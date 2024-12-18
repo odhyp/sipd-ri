@@ -1,12 +1,11 @@
+import pandas as pd
+
+
 class ExcelHelper:
-    def __init__(self):
-        pass
+    """ """
 
-    def compress_excel(self):
-        pass
-
-    def compile_excel(self):
-        pass
-
-    def compile_laporan_realisasi(self):
-        pass
+    @staticmethod
+    def read_jurnal_umum(file_path: str):
+        df = pd.read_excel(file_path)
+        jurnal_umum = df.values.tolist()
+        return jurnal_umum
