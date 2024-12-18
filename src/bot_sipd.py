@@ -233,9 +233,6 @@ class SIPDBot:
 
         Raises:
             Exception: If a critical error occurs during the process.
-
-        To-do:
-            - [ ] add output_path parameter
         """
         try:
             url = (
@@ -272,7 +269,6 @@ class SIPDBot:
                             )
                             btn_download.click()
 
-                        # FIXME: remove the output_dir naming, use the parameter instead
                         download_name = f"2024-{i:02d}-Laporan Realisasi.xlsx"
                         download_path = f"{output_dir}/{download_name}"
 
