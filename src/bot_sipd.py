@@ -217,7 +217,7 @@ class SIPDBot:
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
 
-    def download_realisasi(self, start_month=1, end_month=1):
+    def download_realisasi(self, output_dir: str, start_month=1, end_month=1):
         """
         Downloads realisasi reports for specified months from the SIPD system.
 
@@ -273,12 +273,8 @@ class SIPDBot:
                             btn_download.click()
 
                         # FIXME: remove the output_dir naming, use the parameter instead
-                        current_date = get_current_date()
-                        download_dir = f"Laporan Realisasi {current_date}"
-                        download_name = f"2024-{i:02}-Laporan Realisasi.xlsx"
-                        download_path = PathHelper.get_output_path(
-                            output_dir=download_dir, file_name=download_name
-                        )
+                        download_name = f"2024-{i:02d}-Laporan Realisasi.xlsx"
+                        download_path = f"{output_dir}/{download_name}"
 
                         download_file = download_info.value
                         download_file.save_as(download_path)
