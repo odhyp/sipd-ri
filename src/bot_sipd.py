@@ -318,9 +318,6 @@ class SIPDBot:
         - Klik tambah
         - Klik simpan manual oleh user
         """
-        print(">>>>>>>>>>>>> START TEST")
-        print(">>>>>>>>>>>>> Input Jurnal Umum")
-
         try:
             self.page.goto(self.URL_AKLAP)
             while self.is_404():
@@ -339,46 +336,47 @@ class SIPDBot:
             submenu_jurnal_umum.click()
 
             # Delay for user input
+            print(">>>>>> Input jurnal mulai")
             input("Press Enter to continue...")
 
-            # Input - Kode Rekening
-            kode_rek_id = "#__BVID__225"
+            for i in jurnal_umum:
+                kode_rekening = str(i[0])
+                debit = str(i[1])
+                kredit = str(i[2])
 
-            kode_rek_form = self.page.locator(f"{kode_rek_id} input")
-            kode_rek_form.scroll_into_view_if_needed()
-            kode_rek_form.click()
-            kode_rek_form.type("5.2.01")
+                # Input - Kode Rekening
+                kode_rek_id = "#__BVID__225"
 
-            btn_next = self.page.locator(f'{kode_rek_id} button:has-text("Next")')
-            btn_next.wait_for()
+                kode_rek_form = self.page.locator(f"{kode_rek_id} input")
+                kode_rek_form.scroll_into_view_if_needed()
+                kode_rek_form.click()
+                kode_rek_form.type(kode_rekening)
+                time.sleep(1.5)
 
-            kode_rek_form.press("Enter")
+                btn_next = self.page.locator(f'{kode_rek_id} button:has-text("Next")')
+                btn_next.wait_for()
+                time.sleep(0.5)
 
-            # Input - Debit/Kredit
-            debit_id = "#__BVID__230"
-            kredit_id = "#__BVID__232"
+                kode_rek_form.press("Enter")
 
-            debit_form = self.page.locator(f"{debit_id} input")
-            debit_form.click()
-            debit_form.type("26348500")
+                # Input - Debit/Kredit
+                debit_id = "#__BVID__230"
+                kredit_id = "#__BVID__232"
 
-            # --------- TEST
-            input("Cek debit/kredit")
-            debit_form.clear()
-            # --------- TEST
+                if debit != "nan":
+                    debit_form = self.page.locator(f"{debit_id} input")
+                    debit_form.click()
+                    debit_form.type(debit)
 
-            kredit_form = self.page.locator(f"{kredit_id} input")
-            kredit_form.click()
-            kredit_form.type("123500")
+                if kredit != "nan":
+                    kredit_form = self.page.locator(f"{kredit_id} input")
+                    kredit_form.click()
+                    kredit_form.type(kredit)
 
-            # Tambah
-            tambah_id = "#__BVID__235"
-            btn_tambah = self.page.locator(f'{tambah_id} button:has-text("Tambah")')
-            btn_tambah.click()
-
-            input(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> HERE")
+                # Tambah
+                tambah_id = "#__BVID__235"
+                btn_tambah = self.page.locator(f'{tambah_id} button:has-text("Tambah")')
+                btn_tambah.click()
 
         except Exception as e:
             print(e)
-
-        print(">>>>>>>>>>>>> END TEST")
