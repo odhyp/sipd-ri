@@ -2,7 +2,9 @@ import pandas as pd
 
 
 class ExcelHelper:
-    """ """
+    """
+    A helper class for working with Excel files.
+    """
 
     @staticmethod
     def read_jurnal_umum(file_path: str) -> list:
