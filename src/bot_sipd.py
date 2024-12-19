@@ -306,6 +306,22 @@ class SIPDBot:
         """
         Steps:
 
+    def input_jurnal_umum(self, jurnal_umum: list):
+        """
+        Input Jurnal Umum accounts in Jurnal Umum -> Input Jurnal Umum menu using list of
+        accounts.
+
+        The list should be formatted as:
+            - Kode Rekening
+            - Debit
+            - Kredit
+        Each row should be contained in a list. The first row should be Kode Rekening
+
+        Args:
+            jurnal_umum (list): A list of Jurnal Umum data that consist of Kode Rekening,
+            Debit, and Kredit.
+
+        Steps:
         - Masuk ke menu Jurnal Umum
         - Pilih sub-menu Input Jurnal Umum
         - User input secara manual:
