@@ -302,9 +302,73 @@ class SIPDBot:
         except Exception as e:
             print(f"Critical error occurred: {e}")
 
-    def input_jurnal_umum(self):
+    def posting_jurnal_belanja(self):
         """
         Steps:
+
+        - Masuk ke menu Posting Jurnal
+        - Pilih sub-menu Belanja
+        - User input secara manual:
+            - Pilih SKPD
+            - Filter Keyword sesuai dengan kebutuhan untuk Belanja yang harus di-approve dengan
+        """
+        try:
+            self.page.goto(self.URL_AKLAP)
+            while self.is_404():
+                self.page.goto(self.URL_AKLAP)
+
+            # Menu
+            menu_posting_jurnal = self.page.locator(
+                'a:has-text("Posting Jurnal")'
+            ).first
+            menu_posting_jurnal.wait_for()
+            menu_posting_jurnal.click()
+
+            # Sub-menu
+            submenu_belanja = self.page.locator('a:has-text("Belanja")').first
+            submenu_belanja.wait_for()
+            submenu_belanja.click()
+
+            # Delay for user input
+            print(">>>>>>>>>>> Posting Jurnal Belanja Start")
+            input("Press Enter to continue...")
+
+            # Dropdown - Status
+            dropdown_status = self.page.locator("#vs5__combobox input")
+            dropdown_status.wait_for()
+            dropdown_status.click()
+            dropdown_status.type("Belum di posting")
+            dropdown_status.press("Enter")
+
+            # Filter - Dropdown
+            dropdown_filter = self.page.locator(
+                'div:has-text("Filter By Keyword") select'
+            ).first
+            dropdown_filter.wait_for()
+            dropdown_filter.click()
+            dropdown_filter.select_option("kode_rekening")
+
+            # Filter - Input
+            input_filter = self.page.locator("input[data-v-01f535b6]").first
+            input_filter.wait_for()
+            input_filter.click()
+            input_filter.clear()
+            input_filter.type("5.1.02.01.01.0052")
+
+            # Button - Terapkan
+            btn_terapkan = self.page.locator('button:has-text("Terapkan")')
+            btn_terapkan.wait_for()
+            btn_terapkan.click()
+
+            input("Press Enter to continue...")
+            input_filter.clear()
+            input_filter.type("5.2")
+            btn_terapkan.click()
+            input("Press Enter to continue...")
+
+        except Exception as e:
+            input("Press enter to show error")
+            print(e)
 
     def input_jurnal_umum(self, jurnal_umum: list):
         """
