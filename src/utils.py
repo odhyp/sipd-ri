@@ -7,6 +7,39 @@ import os
 from pathlib import Path
 from datetime import datetime
 
+import tkinter as tk
+from tkinter import filedialog
+
+
+def select_excel_file() -> str:
+    """
+    Opens a file selection dialog and returns the chosen Excel filepath.
+
+    Returns:
+        str: The absolute path to the selected Excel file,
+             or an empty string if the user cancels.
+    """
+    root = tk.Tk()
+    root.withdraw()
+    file_path = filedialog.askopenfilename(filetypes=[("Excel files", "*.xlsx")])
+    root.destroy()
+    return file_path
+
+
+def select_excel_files() -> tuple:
+    """
+    Opens a file selection dialog and returns a tuple of chosen Excel filepaths.
+
+    Returns:
+        tuple: A tuple containing the absolute paths to the selected Excel files,
+               or an empty tuple if the user cancels.
+    """
+    root = tk.Tk()
+    root.withdraw()
+    file_paths = filedialog.askopenfilenames(filetypes=[("Excel files", "*.xlsx")])
+    root.destroy()
+    return file_paths
+
 
 def get_month_name(index) -> str:
     """
