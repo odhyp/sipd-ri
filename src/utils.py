@@ -4,10 +4,9 @@ Provides common operations with getters.
 """
 
 import os
-from pathlib import Path
-from datetime import datetime
-
 import tkinter as tk
+from datetime import datetime
+from pathlib import Path
 from tkinter import filedialog
 
 
