@@ -1,3 +1,9 @@
+"""
+A helper module for working with Excel files.
+
+Provides functions for reading, manipulating, and potentially other operations on Excel files.
+"""
+
 import pandas as pd
 
 
