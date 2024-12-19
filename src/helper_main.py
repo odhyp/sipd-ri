@@ -1,3 +1,7 @@
+"""
+A helper module for generating menu screen, user interactions, and compiling functions.
+"""
+
 import os
 import time
 
@@ -47,17 +51,26 @@ def input_jurnal_umum():
 
 
 def menu_clear():
+    """
+    Clear the console screen.
+    """
     console = Console()
     console.clear()
 
 
 def menu_return():
+    """
+    Print out user input to halt current process.
+    """
     console = Console()
     console.print("\n> Press Enter to continue...", style="dim")
     input()
 
 
 def menu_title():
+    """
+    Prints out the menu title.
+    """
     console = Console()
 
     # Title and version
@@ -75,6 +88,9 @@ def menu_title():
 
 
 def menu_table():
+    """
+    Prints out the menu table.
+    """
     console = Console()
     table = Table(
         show_header=True, show_edge=False, show_lines=False, box=box.HORIZONTALS
@@ -118,6 +134,9 @@ def menu_table():
 
 
 def run_app():
+    """
+    Run the command-line application.
+    """
     console = Console()
 
     try:
