@@ -141,6 +141,8 @@ class SIPDBot:
 
     def login_with_env(self, username, password):
         """
+        ! DEV ONLY !
+
         Log in to SIPD-RI using the provided credentials in the `.env` file
 
         This method navigates to the login page, enters the username and password,
