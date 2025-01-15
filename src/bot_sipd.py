@@ -556,3 +556,92 @@ class SIPDBot:
         except Exception as e:
             print(f"Critical error occurred: {e}")
 
+    def download_lra(self, output_dir: str, skpd_list: list):
+        """
+        Download `Laporan Realisasi Anggaran` from `Laporan Keuangan` menu.
+
+        Args:
+            output_dir (str): _description_
+            skpd_list (list): _description_
+        """
+        try:
+            self.page.goto(self.URL_AKLAP)
+            time.sleep(5)
+            while self.is_404():
+                time.sleep(2)
+                self.page.goto(self.URL_AKLAP)
+
+            # Menu - Laporan Keuangan
+            menu_lk = self.page.locator('a:has-text("Laporan Keuangan")').first
+            menu_lk.wait_for()
+            menu_lk.click()
+
+            # Submenu - LRA
+            submenu_lk = self.page.locator('li:has-text("Laporan Keuangan")').first
+            submenu_lra = submenu_lk.locator('a:has-text("LRA")').first
+            submenu_lra.wait_for()
+            submenu_lra.click()
+
+            # Iterate SKPD start
+            for skpd in skpd_list:
+                print(f"Download start   - {skpd}")
+
+                # Dropdown - Pilih SKPD
+                id_skpd = "__BVID__111"
+                pilih_skpd = self.page.locator(f"#{id_skpd} input")
+                pilih_skpd.scroll_into_view_if_needed()
+                pilih_skpd.click()
+                pilih_skpd.type(skpd)
+                time.sleep(0.3)
+                pilih_skpd.press("Enter")
+
+                # Dropdown - Pilih Klasifikasi
+                id_klasifikasi = "__BVID__116"
+                input_klasifikasi = self.page.locator(f"#{id_klasifikasi} input")
+                input_klasifikasi.click()
+                input_klasifikasi.type("Sub Rincian Objek")
+                time.sleep(0.3)
+                input_klasifikasi.press("Enter")
+
+                # Dropdown - Konsolidasi SKPD
+                id_konsolidasi = "__BVID__132"
+                input_konsolidasi = self.page.locator(f"#{id_konsolidasi} select")
+                input_konsolidasi.click()
+                # Selecting `SKPD dan Unit Konsolidasi`
+                input_konsolidasi.select_option("skpd_mandiri")
+
+                # Button - Terapkan
+                btn_terapkan = self.page.locator('button:has-text("Terapkan")').first
+                btn_terapkan.wait_for()
+                btn_terapkan.click()
+
+                # Button - Cetak
+                btn_cetak = self.page.locator('button:has-text("Cetak")').first
+                btn_cetak.wait_for()
+                btn_cetak.click()
+
+                # File download
+                with self.page.expect_download(timeout=120_000) as download_info:
+                    # Button - Cetak Sub-Menu
+                    btn_cetak_menu = self.page.locator(
+                        'ul li a:has-text("Excel")'
+                    ).first
+                    btn_cetak_menu.wait_for()
+                    btn_cetak_menu.click()
+
+                download_name = f"LRA - {skpd}.xlsx"
+                download_path = f"{output_dir}/{download_name}"
+
+                download_file = download_info.value
+                download_file.save_as(download_path)
+
+                print(f"Download success - {skpd}")
+                print()
+
+                # TODO: add retry logic for failed downloads
+
+            input(">>>>>>>>>>>>>>>>>>>>> Sample end")
+
+        except Exception as e:
+            print(f"Critical error occurred: {e}")
+
