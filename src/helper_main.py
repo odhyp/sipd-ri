@@ -270,7 +270,7 @@ def run_app():
                 console.print(
                     "> :warning:  [red]Invalid choice![/red] Please try again."
                 )
-                menu_return()
+                # menu_return()
 
     except KeyboardInterrupt:
         console.print("\n> :wave: [bold cyan]Good bye...[/bold cyan]")
