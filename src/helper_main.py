@@ -33,18 +33,62 @@ def save_cookies():
             bot.login()
         progress.update(task, advance=40, description="Cookie saved!")
 
-    menu_return()
+# ---------- a3 - good as intended
+def download_neraca():
+    today = get_current_date()
+    output_dir = f"LK - Neraca {today}"
 
+    skpd_list = []
+    with open("data/SKPD-2024.txt", mode="r", encoding="utf-8") as file:
+        skpd_list = [line.strip() for line in file]
 
-def download_laporan_realisasi(start_month, end_month):
     with SIPDBot() as bot:
         bot.login()
-        bot.download_realisasi(start_month, end_month)
+        bot.download_neraca(output_dir, skpd_list)
 
 
-def input_jurnal_umum():
+# ---------- a4 - good as intended
+def download_lra():
+    today = get_current_date()
+    output_dir = f"LK - LRA {today}"
+
+    skpd_list = []
+    with open("data/SKPD-2024.txt", mode="r", encoding="utf-8") as file:
+        skpd_list = [line.strip() for line in file]
+
     with SIPDBot() as bot:
-        pass
+        bot.login()
+        bot.download_lra(output_dir, skpd_list)
+
+
+# ---------- a5 - good as intended
+def download_lo():
+    today = get_current_date()
+    output_dir = f"LK - LO {today}"
+
+    skpd_list = []
+    with open("data/SKPD-2024.txt", mode="r", encoding="utf-8") as file:
+        skpd_list = [line.strip() for line in file]
+
+    with SIPDBot() as bot:
+        bot.login()
+        bot.download_lo(output_dir, skpd_list)
+
+
+# ---------- a6 - building now
+def download_lpe():
+    today = get_current_date()
+    output_dir = f"LK - LPE {today}"
+
+    skpd_list = []
+    with open("data/SKPD-2024.txt", mode="r", encoding="utf-8") as file:
+        skpd_list = [line.strip() for line in file]
+
+    with SIPDBot() as bot:
+        bot.login()
+        bot.download_lpe(output_dir, skpd_list)
+
+
 
 
 # --------------------------------------------------
@@ -111,7 +155,10 @@ def menu_table():
     table.add_row("", Text("Akuntansi", style="green bold"))
     table.add_row("a1", "Posting Jurnal")
     table.add_row("a2", "Input Jurnal Umum")
-    table.add_row("a3", f"Input Saldo Awal{coming_soon}", style="dim")
+    table.add_row("a3", "Download LK - Neraca")
+    table.add_row("a4", "Download LK - LRA")
+    table.add_row("a5", "Download LK - LO")
+    table.add_row("a6", "Download LK - LPE")
     table.add_row()
 
     # Penatausahaan
@@ -152,6 +199,66 @@ def run_app():
                 menu_clear()
                 menu_title()
                 save_cookies()
+
+            # a3 - Download LK - Neraca
+            elif choice == "a3":
+                menu_clear()
+                menu_title()
+
+                console.print("Download LK Neraca - Test Function", style="blue")
+                try:
+                    download_neraca()
+                except Exception:
+                    console.print(Traceback())
+                else:
+                    pass
+                finally:
+                    menu_return()
+
+            # a4 - Download LK - LRA
+            elif choice == "a4":
+                menu_clear()
+                menu_title()
+
+                console.print("Download LK LRA - Test Function", style="blue")
+                try:
+                    download_lra()
+                except Exception:
+                    console.print(Traceback())
+                else:
+                    pass
+                finally:
+                    menu_return()
+
+            # a5 - Download LK - LO
+            elif choice == "a5":
+                menu_clear()
+                menu_title()
+
+                console.print("Download LK LO - Test Function", style="blue")
+                try:
+                    download_lo()
+                except Exception:
+                    console.print(Traceback())
+                else:
+                    pass
+                finally:
+                    menu_return()
+
+            # a6 - Download LK - LPE
+            elif choice == "a6":
+                menu_clear()
+                menu_title()
+
+                console.print("Download LK LPE - Test Function", style="blue")
+                try:
+                    download_lpe()
+                except Exception:
+                    console.print(Traceback())
+                else:
+                    pass
+                finally:
+                    menu_return()
 
             # 0 - Exit
             elif choice == "0":
