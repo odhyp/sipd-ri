@@ -224,7 +224,7 @@ class SIPDBot:
 
     def download_realisasi(self, output_dir: str, start_month=1, end_month=1):
         """
-        Downloads realisasi reports for specified months from the SIPD system.
+        Downloads `Laporan Realisasi` for specified months from SIPD.
 
         Args:
             output_dir (str): The output directory where the file will be saved
