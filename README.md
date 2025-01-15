@@ -78,7 +78,13 @@ If you prefer to run the app from source, follow these steps:
    pip install -r requirements.txt
    ```
 
-5. Run the application
+5. Install Playwright and its browser binaries
+
+   ```bash
+   playwright install
+   ```
+
+6. Run the application
 
    ```bash
    python main.py
