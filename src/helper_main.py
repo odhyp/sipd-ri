@@ -260,6 +260,23 @@ def run_app():
                 finally:
                     menu_return()
 
+            # b1 - Download Laporan Realisasi
+            elif choice == "b1":
+                menu_clear()
+                menu_title()
+
+                console.print("Download Laporan Realisasi", style="blue")
+                try:
+                    start_month = int(input("Enter start month: "))
+                    end_month = int(input("Enter end month: "))
+                    download_laporan_realisasi(start_month, end_month)
+                except Exception:
+                    console.print(Traceback())
+                else:
+                    pass
+                finally:
+                    menu_return()
+
             # 0 - Exit
             elif choice == "0":
                 console.print("> :wave: [bold cyan]Good bye...[/bold cyan]")
