@@ -430,7 +430,7 @@ class SIPDBot:
                 kredit = str(i[2])
 
                 # Input - Kode Rekening
-                kode_rek_id = "#__BVID__225"
+                kode_rek_id = "#__BVID__224"
 
                 kode_rek_form = self.page.locator(f"{kode_rek_id} input")
                 kode_rek_form.scroll_into_view_if_needed()
@@ -445,8 +445,8 @@ class SIPDBot:
                 kode_rek_form.press("Enter")
 
                 # Input - Debit/Kredit
-                debit_id = "#__BVID__230"
-                kredit_id = "#__BVID__232"
+                debit_id = "#__BVID__229"
+                kredit_id = "#__BVID__231"
 
                 if debit != "nan":
                     debit_form = self.page.locator(f"{debit_id} input")
@@ -459,9 +459,11 @@ class SIPDBot:
                     kredit_form.type(kredit)
 
                 # Tambah
-                tambah_id = "#__BVID__235"
+                tambah_id = "#__BVID__234"
                 btn_tambah = self.page.locator(f'{tambah_id} button:has-text("Tambah")')
                 btn_tambah.click()
+
+            input("End input jurnal>>>>")
 
         except Exception as e:
             print(e)
