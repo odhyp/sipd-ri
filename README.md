@@ -18,10 +18,9 @@
   <h3 align="center">SIPD-RI</h3>
 
   <p align="center">
-    A simple command-line Python application<br />to help with SIPD-RI and accounting tasks.
+    A simple command-line Python application<br />to help with SIPD-RI and office tasks
     <br />
     <a href="https://github.com/odhyp/sipd-ri"><strong>Explore the docs »</strong></a>
-    <br />
     <br />
     <br />
     <a href="https://github.com/odhyp/sipd-ri/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
@@ -106,6 +105,7 @@ TODO: update the docs url
 - SIPDBot
 
   - [ ] AKLAP - Posting Jurnal (Belanja)
+  - [x] AKLAP - Download LK (Neraca, LRA, LO, LPE)
   - [ ] Penatausahaan - Scrape BKU Pajak
   - [ ] Data cleaning Laporan Realisasi Compile
 
