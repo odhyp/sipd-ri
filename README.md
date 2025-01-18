@@ -1,9 +1,8 @@
 <!-- PROJECT SHIELDS -->
 
-<!-- [![Forks][forks-shield]][forks-url] -->
-
 [![Issues][issues-shield]][issues-url]
 [![Stargazers][stars-shield]][stars-url]
+[![Forks][forks-shield]][forks-url]
 [![License][license-shield]][license-url]
 [![Sponsor][sponsor-shield]][sponsor-url]
 
@@ -18,7 +17,7 @@
   <h3 align="center">SIPD-RI</h3>
 
   <p align="center">
-    A simple command-line Python application<br />to help with SIPD-RI and office tasks
+    A simple command-line application<br />to automate SIPD-RI tasks
     <br />
     <a href="https://github.com/odhyp/sipd-ri"><strong>Explore the docs »</strong></a>
     <br />
@@ -40,7 +39,34 @@
 
 TODO: update the product screenshot
 
-This project helps SIPD-RI users automate repetitive tasks like downloading reports, scraping tables, and performing batch operations such as approving or inputting data. It also offers additional features like compressing and merging Excel files, as well as converting `.xls` files to the newer `.xlsx` format.
+This project is a command-line application which helps SIPD-RI users automate repetitive tasks in [SIPD-RI](https://sipd.kemendagri.go.id/landing) web application, such as downloading reports, scraping tables, and performing batch operations such as approving or inputting data.
+
+<!-- FEATURES -->
+
+## 📌 Features
+
+These are the main features that SIPD-RI helper offers:
+
+1. Input Jurnal Umum
+2. Download all of Laporan Keuangan components
+
+   > Able to download Neraca, LRA, LO, and LPE for all SKPD (PA or KPA)
+
+3. Download Buku Jurnal
+
+   > For all SKPD (PA or KPA)
+
+4. Download Laporan Realisasi
+
+   > For all months and consolidate them
+
+5. Scrape BKU Pajak Table
+
+Additionally, SIPD-RI helper also provides useful office tasks such as:
+
+1. Compile, compress, and consolidate Excel files
+
+2. Convert `.xls` to `.xlsx`
 
 <!-- GETTING STARTED -->
 
@@ -102,23 +128,13 @@ TODO: update the docs url
 
 ## 🗺️ Roadmap
 
-- SIPDBot
-
-  - [ ] AKLAP - Posting Jurnal (Belanja)
-  - [x] AKLAP - Download LK (Neraca, LRA, LO, LPE)
-  - [ ] Penatausahaan - Scrape BKU Pajak
-  - [ ] Data cleaning Laporan Realisasi Compile
-
-- ExcelHelper
-
-  - [x] Compress Excel files (re-save Excel file with invalid format)
-  - [x] Compile Excel files
-  - [ ] Convert `.xls` to `.xlsx`
-
-- Other
-  - [ ] remove/change test print and time.sleep
-  - [ ] add docstring for class and class methods
-  - [ ] prettify the print output and add progress bar using `rich`
+- [ ] AKLAP - Posting Jurnal (Belanja)
+- [ ] Penatausahaan - Scrape BKU Pajak
+- [ ] Data cleaning Laporan Realisasi Compile
+- [ ] Convert `.xls` to `.xlsx`
+- [ ] remove/change test print and time.sleep
+- [ ] add docstring for class and class methods
+- [ ] prettify the print output and add progress bar using `rich`
 
 See the [open issues](https://github.com/odhyp/sipd-ri/issues) for a full list of proposed features (and known issues).
 
@@ -128,7 +144,7 @@ See the [open issues](https://github.com/odhyp/sipd-ri/issues) for a full list o
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+If you have a suggestion that would make this project better, please fork the repo and create a pull request. You can also simply [open an issue](https://github.com/odhyp/sipd-ri/issues/new?template=feature_request.md) for a feature request.
 Don't forget to give the project a star! Thanks again!
 
 1. Fork the Project
