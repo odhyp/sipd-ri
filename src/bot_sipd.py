@@ -820,3 +820,115 @@ class SIPDBot:
 
         except Exception as e:
             print(f"Critical error occurred: {e}")
+
+    def download_buku_jurnal(self, output_dir: str, skpd_list: list):
+        """
+        Download `Laporan Perubahan Ekuitas` from `Laporan Keuangan` menu.
+
+        Args:
+            output_dir (str): _description_
+            skpd_list (list): _description_
+        """
+        try:
+            self.page.goto(self.URL_AKLAP)
+            time.sleep(2)
+            while self.is_404():
+                time.sleep(2)
+                self.page.reload()
+
+            # Menu - Laporan Keuangan
+            menu_buku_jurnal = self.page.locator('a:has-text("Buku Jurnal")').first
+            menu_buku_jurnal.wait_for()
+            menu_buku_jurnal.click()
+
+            # Iterate SKPD start
+            for skpd in skpd_list:
+                print(f"\nDownload start   - {skpd}")
+
+                title_skpd = self.page.locator('div:has-text("SKPD")')
+
+                # Dropdown - Pilih SKPD
+                pilih_skpd = title_skpd.locator("input").first
+                pilih_skpd.scroll_into_view_if_needed()
+                pilih_skpd.click()
+                time.sleep(0.3)
+                pilih_skpd.type(skpd)
+                time.sleep(0.3)
+                pilih_skpd.press("Enter")
+
+                # Button - Terapkan
+                btn_terapkan = self.page.locator('button:has-text("Terapkan")').first
+                btn_terapkan.wait_for()
+                btn_terapkan.click()
+                time.sleep(1)
+
+                # Button - Cetak
+                btn_cetak = self.page.locator('button:has-text("Cetak")').first
+                btn_cetak.wait_for()
+                btn_cetak.click()
+
+                # File download
+                try:
+                    download_timeout = 60_000
+
+                    with self.page.expect_download(
+                        timeout=download_timeout
+                    ) as download_info:
+                        # Button - Cetak Sub-Menu
+                        btn_cetak_menu = self.page.locator(
+                            'ul li a:has-text("EXCEL")'
+                        ).first
+                        btn_cetak_menu.wait_for()
+                        btn_cetak_menu.click()
+
+                        # Error popup - "Gagal Cetak"
+                        try:
+                            error_popup = self.page.locator(
+                                'div div h2:has-text("Gagal Cetak")'
+                            )
+                            error_popup.wait_for(state="visible", timeout=10_000)
+
+                            print("Gagal Cetak!")
+
+                            error_button = self.page.locator(
+                                'button:has-text("OK")'
+                            ).first
+                            error_button.click()
+
+                            continue
+
+                        except Exception:
+                            pass
+
+                    download_name = f"Buku Jurnal - {skpd}.xlsx"
+                    download_path = f"{output_dir}/{download_name}"
+
+                    download_file = download_info.value
+                    download_file.save_as(download_path)
+
+                    print(f"Download success - {skpd}")
+
+                except PlaywrightTimeoutError as e:
+                    print(f"Download error for {skpd}: {e}")
+                    self.page.reload()
+
+                    while self.is_404():
+                        time.sleep(2)
+                        self.page.reload()
+
+                    # TODO: add retry logic for failed downloads
+
+                except Exception as e:
+                    # TODO: there are some SKPD that can't be downloaded using "Semua Transaksi"
+                    #       A pop-up that says "Gagal Cetak" will show up.
+                    print(f"Download error: {e}")
+                    self.page.reload()
+
+                    while self.is_404():
+                        time.sleep(2)
+                        self.page.reload()
+
+            input(">>>>>>>>>>>>>>>>>>>>> Sample end")
+
+        except Exception as e:
+            print(f"Critical error occurred: {e}")
