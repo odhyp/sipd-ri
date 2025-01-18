@@ -33,6 +33,16 @@ def save_cookies():
             bot.login()
         progress.update(task, advance=40, description="Cookie saved!")
 
+
+# ---------- a2 - beta success
+def input_jurnal_umum(file_path):
+    jurnal_umum = ExcelHelper.read_jurnal_umum(file_path)
+
+    with SIPDBot() as bot:
+        bot.login()
+        bot.input_jurnal_umum(jurnal_umum)
+
+
 # ---------- a3 - good as intended
 def download_neraca():
     today = get_current_date()
@@ -75,7 +85,7 @@ def download_lo():
         bot.download_lo(output_dir, skpd_list)
 
 
-# ---------- a6 - building now
+# ---------- a6 - good as intended
 def download_lpe():
     today = get_current_date()
     output_dir = f"LK - LPE {today}"
@@ -89,11 +99,31 @@ def download_lpe():
         bot.download_lpe(output_dir, skpd_list)
 
 
+# ---------- a7 - building now
+def download_buku_jurnal():
+    today = get_current_date()
+    output_dir = f"Buku Jurnal {today}"
+
+    skpd_list = []
+    with open("data/SKPD-KPA-2024.txt", mode="r", encoding="utf-8") as file:
+        skpd_list = [line.strip() for line in file]
+
+    with SIPDBot() as bot:
+        bot.login()
+        bot.download_buku_jurnal(output_dir, skpd_list)
 
 
-# --------------------------------------------------
+# ---------- b1
+def download_laporan_realisasi(start_month, end_month):
+    today = get_current_date()
+    output_dir = f"Laporan Realisasi {today}"
+
+    with SIPDBot() as bot:
+        bot.login()
+        bot.download_realisasi(output_dir, start_month, end_month)
 
 
+# ---------- Displayed Menu functions -----------------------------------------
 def menu_clear():
     """
     Clear the console screen.
@@ -147,18 +177,20 @@ def menu_table():
     table.add_column("Menu", style="bold red", justify="right")
     table.add_column("Function", style="white")
 
-    # Save cookies
+    # Common Menu
+    table.add_row("0", "Exit")
     table.add_row("1", "Save cookies [dim](Please refresh cookies everyday!)[/dim]")
     table.add_row()
 
     # Akuntansi
     table.add_row("", Text("Akuntansi", style="green bold"))
-    table.add_row("a1", "Posting Jurnal")
+    table.add_row("a1", f"Posting Jurnal{coming_soon}", style="dim")
     table.add_row("a2", "Input Jurnal Umum")
     table.add_row("a3", "Download LK - Neraca")
     table.add_row("a4", "Download LK - LRA")
     table.add_row("a5", "Download LK - LO")
     table.add_row("a6", "Download LK - LPE")
+    table.add_row("a7", "Download Buku Jurnal")
     table.add_row()
 
     # Penatausahaan
@@ -169,13 +201,10 @@ def menu_table():
 
     # Misc.
     table.add_row("", Text("Miscellaneous", style="green bold"))
-    table.add_row("c1", f"Compile Excel{coming_soon}", style="dim")
+    table.add_row("c1", "Resave Excel - Test")
     table.add_row("c2", f"Clean Excel{coming_soon}", style="dim")
     table.add_row("c3", f"Convert .xls to .xlsx{coming_soon}", style="dim")
     table.add_row()
-
-    # Exit
-    table.add_row("0", "Exit")
 
     console.print(table)
 
@@ -199,6 +228,37 @@ def run_app():
                 menu_clear()
                 menu_title()
                 save_cookies()
+
+            # a1 - Posting Jurnal
+            elif choice == "a1":
+                menu_clear()
+                menu_title()
+
+                console.print("Test Posting Jurnal", style="blue")
+                try:
+                    posting_jurnal()
+                except Exception:
+                    console.print(Traceback())
+                else:
+                    pass
+                finally:
+                    menu_return()
+
+            # a2 - Input Jurnal Umum
+            elif choice == "a2":
+                menu_clear()
+                menu_title()
+
+                console.print("Input Jurnal Umum - Test Function", style="blue")
+                try:
+                    file_path = "jurnal_umum.xlsx"
+                    input_jurnal_umum(file_path)
+                except Exception:
+                    console.print(Traceback())
+                else:
+                    pass
+                finally:
+                    menu_return()
 
             # a3 - Download LK - Neraca
             elif choice == "a3":
@@ -253,6 +313,21 @@ def run_app():
                 console.print("Download LK LPE - Test Function", style="blue")
                 try:
                     download_lpe()
+                except Exception:
+                    console.print(Traceback())
+                else:
+                    pass
+                finally:
+                    menu_return()
+
+            # a7 - Download Buku Jurnal
+            elif choice == "a7":
+                menu_clear()
+                menu_title()
+
+                console.print("Download Buku Jurnal - Test Function", style="blue")
+                try:
+                    download_buku_jurnal()
                 except Exception:
                     console.print(Traceback())
                 else:
