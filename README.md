@@ -1,8 +1,8 @@
 <!-- PROJECT SHIELDS -->
 
-[![Issues][issues-shield]][issues-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Forks][forks-shield]][forks-url]
+[![Issues][issues-shield]][issues-url]
 [![License][license-shield]][license-url]
 [![Sponsor][sponsor-shield]][sponsor-url]
 
@@ -11,7 +11,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/odhyp/sipd-ri">
-    <img src="assets/img/logo_sipd.png" alt="Logo" width="auto" height="80">
+    <img src="docs/assets/logo.png" alt="Logo" width="auto" height="80">
   </a>
 
   <h3 align="center">SIPD-RI</h3>
@@ -19,12 +19,12 @@
   <p align="center">
     A simple command-line application<br />to automate SIPD-RI tasks
     <br />
-    <a href="https://github.com/odhyp/sipd-ri"><strong>Explore the docs »</strong></a>
+    <a href="https://odhyp.github.io/sipd-ri/"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/odhyp/sipd-ri/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    <a href="https://github.com/odhyp/sipd-ri/issues/new?template=bug_report.md">Report Bug</a>
     ·
-    <a href="https://github.com/odhyp/sipd-ri/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+    <a href="https://github.com/odhyp/sipd-ri/issues/new?template=feature_request.md">Request Feature</a>
     ·
     <a href="https://github.com/sponsors/odhyp">Donate</a>
   </p>
