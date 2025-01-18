@@ -1,4 +1,4 @@
-# Installation
+# :wrench: Installation
 
 ## Using the Pre-Built `.exe`
 

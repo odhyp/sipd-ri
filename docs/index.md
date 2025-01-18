@@ -1,4 +1,4 @@
-# Welcome!
+# :smile: Welcome!
 
 SIPD-RI Helper is a simple command-line Python application to help with SIPD-RI and office tasks.
 
