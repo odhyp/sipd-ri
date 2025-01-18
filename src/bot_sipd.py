@@ -488,6 +488,32 @@ class SIPDBot:
 
         except Exception as e:
             print(e)
+
+    def table_scrape(self):
+        print("This is table scraping")
+
+        self.page.goto(
+            "https://sipd.kemendagri.go.id/penatausahaan/pengeluaran/bku/skpd"
+        )
+        input("Press Enter to scrape table...")
+
+        tables = self.page.query_selector_all("table")
+        if not tables:
+            print("No tables found on this page.")
+            return
+
+        for i, table in enumerate(tables):
+            rows = table.query_selector_all("tr")
+            table_data = []
+            for row in rows:
+                cells = row.query_selector_all("td, th")
+                table_data.append([cell.text_content().strip() for cell in cells])
+
+        df = pd.DataFrame(table_data[1:], columns=table_data[0])
+        output_file = "sample-table.xlsx"
+        df.to_excel(output_file, index=False)
+        print(f"Tables is saved in {output_file}.")
+
     def download_neraca(self, output_dir: str, skpd_list: list):
         """
         Download `Neraca` from `Laporan Keuangan` menu.
