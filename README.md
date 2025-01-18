@@ -14,7 +14,7 @@
     <img src="docs/assets/logo.png" alt="Logo" width="auto" height="80">
   </a>
 
-  <h3 align="center">SIPD-RI</h3>
+  <h3 align="center">SIPD-RI Helper</h3>
 
   <p align="center">
     A simple command-line application<br />to automate SIPD-RI tasks
@@ -39,7 +39,7 @@
 
 TODO: update the product screenshot
 
-This project is a command-line application which helps SIPD-RI users automate repetitive tasks in [SIPD-RI](https://sipd.kemendagri.go.id/landing) web application, such as downloading reports, scraping tables, and performing batch operations such as approving or inputting data.
+SIPD-RI Helper is a command-line application which helps SIPD-RI users automate repetitive tasks in [SIPD-RI](https://sipd.kemendagri.go.id/landing) web application, such as downloading reports, scraping tables, and performing batch operations such as approving or inputting data.
 
 <!-- FEATURES -->
 
@@ -62,7 +62,7 @@ These are the main features that SIPD-RI helper offers:
 
 5. Scrape BKU Pajak Table
 
-Additionally, SIPD-RI helper also provides useful office tasks such as:
+Additionally, SIPD-RI Helper also provides useful office tasks such as:
 
 1. Compile, compress, and consolidate Excel files
 
@@ -121,8 +121,7 @@ If you prefer to run the app from source, follow these steps:
 
 After launching the application (either by running the `.exe` file or via Python), you can begin automating tasks by selecting the desired menu option in the command-line interface.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
-TODO: update the docs url
+_For more examples, please refer to the [Documentation](https://odhyp.github.io/sipd-ri/)_
 
 <!-- ROADMAP -->
 
