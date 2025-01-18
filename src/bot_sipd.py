@@ -350,22 +350,43 @@ class SIPDBot:
             dropdown_filter.click()
             dropdown_filter.select_option("kode_rekening")
 
-            # Filter - Input
+            # Pake tipsnya mbak Uyik, 005 bisa nge-grab 0052, 0053, dst.
+            metode_beban = ["5.1.02.01.01.005", "5.1.02.01.01.006", "5.1.02.01.01.007"]
+            metode_aset = ["5.1.02.01"]
+
             input_filter = self.page.locator("input[data-v-01f535b6]").first
+            btn_terapkan = self.page.locator('button:has-text("Terapkan")')
+
+            print(">>>>>>>>>>>> Metode Beban Start")
+            for jurnal in metode_beban:
+                print(f"Metode Beban: {jurnal}\n")
+
+                # Filter - Input
+                input_filter.wait_for()
+                input_filter.click()
+                input_filter.clear()
+                input_filter.type(jurnal)
+
+                # Button - Terapkan
+                btn_terapkan.wait_for()
+                btn_terapkan.click()
+
+                input("Press Enter to continue...")
+
+            print(">>>>>>>>>>>> Metode Aset Start")
+            # Filter - Input
             input_filter.wait_for()
             input_filter.click()
             input_filter.clear()
-            input_filter.type("5.1.02.01.01.0052")
+            input_filter.type(metode_aset[0])
 
             # Button - Terapkan
-            btn_terapkan = self.page.locator('button:has-text("Terapkan")')
             btn_terapkan.wait_for()
             btn_terapkan.click()
 
             input("Press Enter to continue...")
-            input_filter.clear()
-            input_filter.type("5.2")
-            btn_terapkan.click()
+
+            print("Done iterating")
             input("Press Enter to continue...")
 
         except Exception as e:
