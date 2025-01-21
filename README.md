@@ -35,7 +35,7 @@
 
 ## 🏖️ About This Project
 
-![Product Screenshot](/assets/img/product.png)
+![Product Screenshot](/docs/assets/product.png)
 
 TODO: update the product screenshot
 
@@ -45,75 +45,26 @@ SIPD-RI Helper is a command-line application which helps SIPD-RI users automate 
 
 ## 📌 Features
 
-These are the main features that SIPD-RI helper offers:
+These are the main features that SIPD-RI Helper offers:
 
-1. Input Jurnal Umum
-2. Download all of Laporan Keuangan components
+- Input Jurnal Umum
+- Download all of Laporan Keuangan components
+- Download Buku Jurnal
+- Download Laporan Realisasi
+- Scrape BKU Pajak Table
 
-   > Able to download Neraca, LRA, LO, and LPE for all SKPD (PA or KPA)
+Additionally, we also provides useful office tasks such as:
 
-3. Download Buku Jurnal
+- Compile, compress, and consolidate Excel files
+- Convert `.xls` to `.xlsx`
 
-   > For all SKPD (PA or KPA)
+<!-- INSTALLATION -->
 
-4. Download Laporan Realisasi
+## 🛠️ Installation
 
-   > For all months and consolidate them
+To set up and run this project, check out the [Installation guide](https://odhyp.github.io/sipd-ri/01_installation/) in our documentation.
 
-5. Scrape BKU Pajak Table
-
-Additionally, SIPD-RI Helper also provides useful office tasks such as:
-
-1. Compile, compress, and consolidate Excel files
-
-2. Convert `.xls` to `.xlsx`
-
-<!-- GETTING STARTED -->
-
-## 👍 Getting Started
-
-To get started with this project, you can either run it directly from the source code or use the pre-built `.exe` version for Windows.
-
-### Option 1: Using the Pre-Built `.exe`
-
-1. **Download the Latest Release**: Go to the [releases page]() and download the latest `.exe` file for your system.
-2. **Run the Application**: Once downloaded, simply double-click the `.exe` file to launch the app.
-
-### Option 2: Running from Source Code
-
-If you prefer to run the app from source, follow these steps:
-
-1. Make sure you have Python 3.13 (or higher) installed. You can download it from the [official Python website](https://www.python.org/downloads/).
-
-2. Clone the repository to your local machine
-
-   ```bash
-    git clone https://github.com/odhyp/sipd-ri.git
-   ```
-
-3. Navigate to the project directory
-
-   ```bash
-   cd sipd-ri
-   ```
-
-4. Install Python dependencies
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-5. Install Playwright and its browser binaries
-
-   ```bash
-   playwright install
-   ```
-
-6. Run the application
-
-   ```bash
-   python main.py
-   ```
+It provides detailed instructions for both using the pre-built `.exe` version and running the app from the source code.
 
 <!-- USAGE EXAMPLES -->
 
@@ -121,42 +72,17 @@ If you prefer to run the app from source, follow these steps:
 
 After launching the application (either by running the `.exe` file or via Python), you can begin automating tasks by selecting the desired menu option in the command-line interface.
 
-_For more examples, please refer to the [Documentation](https://odhyp.github.io/sipd-ri/)_
-
-<!-- ROADMAP -->
-
-## 🗺️ Roadmap
-
-- [ ] AKLAP - Posting Jurnal (Belanja)
-- [ ] Penatausahaan - Scrape BKU Pajak
-- [ ] Data cleaning Laporan Realisasi Compile
-- [ ] Convert `.xls` to `.xlsx`
-- [ ] remove/change test print and time.sleep
-- [ ] add docstring for class and class methods
-- [ ] prettify the print output and add progress bar using `rich`
-
-See the [open issues](https://github.com/odhyp/sipd-ri/issues) for a full list of proposed features (and known issues).
+_For more examples, please refer to the [Documentation](https://odhyp.github.io/sipd-ri/03_user_guide/)_
 
 <!-- CONTRIBUTING -->
 
 ## 💌 Contributing
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. We greatly appreciate your contributions!
 
-If you have a suggestion that would make this project better, please fork the repo and create a pull request. You can also simply [open an issue](https://github.com/odhyp/sipd-ri/issues/new?template=feature_request.md) for a feature request.
-Don't forget to give the project a star! Thanks again!
+To learn how to contribute, please visit the [Contributing section](https://odhyp.github.io/sipd-ri/04_contributing/) in our documentation.
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/YourFeature`)
-3. Commit your Changes (`git commit -m 'Add some YourFeature'`)
-4. Push to the Branch (`git push origin feature/YourFeature`)
-5. Open a Pull Request
-
-### Top contributors:
-
-<a href="https://github.com/odhyp/sipd-ri/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=odhyp/sipd-ri" alt="contrib.rocks image" />
-</a>
+Thank you for helping to make this project better!
 
 <!-- LICENSE -->
 
