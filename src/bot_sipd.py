@@ -870,7 +870,7 @@ class SIPDBot:
 
     def download_buku_jurnal(self, output_dir: str, skpd_list: list):
         """
-        Download `Laporan Perubahan Ekuitas` from `Laporan Keuangan` menu.
+        Download `Buku Jurnal` from `Buku Jurnal` menu.
 
         Args:
             output_dir (str): _description_
