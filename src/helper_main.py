@@ -104,8 +104,11 @@ def download_buku_jurnal():
     today = get_current_date()
     output_dir = f"Buku Jurnal {today}"
 
+    # FIXME: Update using Tkinter file select
+    skpd_path = "data/DIKPORA-dan-anak.txt"
+
     skpd_list = []
-    with open("data/SKPD-KPA-2024.txt", mode="r", encoding="utf-8") as file:
+    with open(skpd_path, mode="r", encoding="utf-8") as file:
         skpd_list = [line.strip() for line in file]
 
     with SIPDBot() as bot:
