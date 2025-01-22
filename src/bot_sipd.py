@@ -892,16 +892,36 @@ class SIPDBot:
             for skpd in skpd_list:
                 print(f"\nDownload start   - {skpd}")
 
-                title_skpd = self.page.locator('div:has-text("SKPD")')
-
                 # Dropdown - Pilih SKPD
+                title_skpd = self.page.locator('div:has-text("SKPD")')
                 pilih_skpd = title_skpd.locator("input").first
                 pilih_skpd.scroll_into_view_if_needed()
                 pilih_skpd.click()
-                time.sleep(0.3)
+                time.sleep(0.25)
                 pilih_skpd.type(skpd)
-                time.sleep(0.3)
+                time.sleep(0.25)
                 pilih_skpd.press("Enter")
+
+                # Dropdown - Konsolidasi SKPD
+                title_konsolidasi = self.page.locator(
+                    'div:has-text("Konsolidasi SKPD")'
+                )
+                pilih_konsolidasi = title_konsolidasi.locator("input").nth(1)
+                pilih_konsolidasi.click()
+                time.sleep(0.25)
+                pilih_konsolidasi.type("SKPD dan Unit Konsolidasi")
+                time.sleep(0.25)
+                pilih_konsolidasi.press("Enter")
+
+                # Dropdown - Jenis Transaksi
+                # FIXME: Jenis Transaksi input is hard-coded
+                title_jenis = self.page.locator('div:has-text("Jenis Transaksi")')
+                pilih_jenis = title_jenis.locator("input").nth(2)
+                pilih_jenis.click()
+                time.sleep(0.25)
+                pilih_jenis.type("Jurnal Umum")
+                time.sleep(0.25)
+                pilih_jenis.press("Enter")
 
                 # Button - Terapkan
                 btn_terapkan = self.page.locator('button:has-text("Terapkan")').first
