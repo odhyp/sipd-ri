@@ -99,7 +99,7 @@ def download_lpe():
         bot.download_lpe(output_dir, skpd_list)
 
 
-# ---------- a7 - building now
+# ---------- a7 - good as intended
 def download_buku_jurnal():
     today = get_current_date()
     output_dir = f"Buku Jurnal {today}"
