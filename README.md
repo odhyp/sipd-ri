@@ -35,10 +35,6 @@
 
 ## 🏖️ About This Project
 
-![Product Screenshot](/docs/assets/product.png)
-
-TODO: update the product screenshot
-
 SIPD-RI Helper is a command-line application which helps SIPD-RI users automate repetitive tasks in [SIPD-RI](https://sipd.kemendagri.go.id/landing) web application, such as downloading reports, scraping tables, and performing batch operations such as approving or inputting data.
 
 <!-- FEATURES -->
@@ -92,8 +88,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 <!-- LINKS & IMAGES -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/odhyp/sipd-ri.svg?style=for-the-badge
-[contributors-url]: https://github.com/odhyp/sipd-ri/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/odhyp/sipd-ri.svg?style=for-the-badge
 [forks-url]: https://github.com/odhyp/sipd-ri/network/members
 [stars-shield]: https://img.shields.io/github/stars/odhyp/sipd-ri.svg?style=for-the-badge
