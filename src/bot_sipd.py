@@ -545,7 +545,7 @@ class SIPDBot:
                 print(f"Download start   - {skpd}")
 
                 # Dropdown - Pilih SKPD
-                id_skpd = "__BVID__111"
+                id_skpd = "__BVID__112"
                 pilih_skpd = self.page.locator(f"#{id_skpd} input")
                 pilih_skpd.scroll_into_view_if_needed()
                 pilih_skpd.click()
@@ -554,15 +554,23 @@ class SIPDBot:
                 pilih_skpd.press("Enter")
 
                 # Dropdown - Pilih Klasifikasi
-                id_klasifikasi = "__BVID__116"
+                id_klasifikasi = "__BVID__117"
                 input_klasifikasi = self.page.locator(f"#{id_klasifikasi} input")
                 input_klasifikasi.click()
                 input_klasifikasi.type("Sub Rincian Objek")
                 time.sleep(0.3)
                 input_klasifikasi.press("Enter")
 
+                # Dropdown - Pilih Preview Laporan
+                id_klasifikasi = "__BVID__128"
+                input_klasifikasi = self.page.locator(f"#{id_klasifikasi} input")
+                input_klasifikasi.click()
+                input_klasifikasi.type("Audited")
+                time.sleep(0.3)
+                input_klasifikasi.press("Enter")
+
                 # Dropdown - Konsolidasi SKPD
-                id_konsolidasi = "__BVID__132"
+                id_konsolidasi = "__BVID__133"
                 input_konsolidasi = self.page.locator(f"#{id_konsolidasi} select")
                 input_konsolidasi.click()
                 # Selecting `SKPD dan Unit Konsolidasi`
@@ -634,7 +642,7 @@ class SIPDBot:
                 print(f"Download start   - {skpd}")
 
                 # Dropdown - Pilih SKPD
-                id_skpd = "__BVID__111"
+                id_skpd = "__BVID__89"
                 pilih_skpd = self.page.locator(f"#{id_skpd} input")
                 pilih_skpd.scroll_into_view_if_needed()
                 pilih_skpd.click()
@@ -643,7 +651,7 @@ class SIPDBot:
                 pilih_skpd.press("Enter")
 
                 # Dropdown - Pilih Klasifikasi
-                id_klasifikasi = "__BVID__116"
+                id_klasifikasi = "__BVID__95"
                 input_klasifikasi = self.page.locator(f"#{id_klasifikasi} input")
                 input_klasifikasi.click()
                 input_klasifikasi.type("Sub Rincian Objek")
@@ -651,7 +659,7 @@ class SIPDBot:
                 input_klasifikasi.press("Enter")
 
                 # Dropdown - Konsolidasi SKPD
-                id_konsolidasi = "__BVID__132"
+                id_konsolidasi = "__BVID__112"
                 input_konsolidasi = self.page.locator(f"#{id_konsolidasi} select")
                 input_konsolidasi.click()
                 # Selecting `SKPD dan Unit Konsolidasi`
@@ -924,6 +932,7 @@ class SIPDBot:
                 pilih_jenis.press("Enter")
 
                 # Button - Terapkan
+                time.sleep(0.5)
                 btn_terapkan = self.page.locator('button:has-text("Terapkan")').first
                 btn_terapkan.wait_for()
                 btn_terapkan.click()
@@ -996,6 +1005,81 @@ class SIPDBot:
                         self.page.reload()
 
             input(">>>>>>>>>>>>>>>>>>>>> Sample end")
+
+        except Exception as e:
+            print(f"Critical error occurred: {e}")
+
+    def scrape_buku_jurnal(self, skpd_name: str, page_to_scrape: int):
+        """
+        Scrape Buku Jurnal
+        """
+        try:
+            self.page.goto(self.URL_AKLAP)
+            time.sleep(2)
+            while self.is_404():
+                time.sleep(2)
+                self.page.reload()
+
+            # Menu - Laporan Keuangan
+            menu_buku_jurnal = self.page.locator('a:has-text("Buku Jurnal")').first
+            menu_buku_jurnal.wait_for()
+            menu_buku_jurnal.click()
+
+            print(f"\nScrape start - {skpd_name}")
+
+            # Dropdown - Pilih SKPD
+            title_skpd = self.page.locator('div:has-text("SKPD")')
+            pilih_skpd = title_skpd.locator("input").first
+            pilih_skpd.scroll_into_view_if_needed()
+            pilih_skpd.click()
+            time.sleep(0.25)
+            pilih_skpd.type(skpd_name)
+            time.sleep(0.25)
+            pilih_skpd.press("Enter")
+
+            # Dropdown - Konsolidasi SKPD
+            title_konsolidasi = self.page.locator('div:has-text("Konsolidasi SKPD")')
+            pilih_konsolidasi = title_konsolidasi.locator("input").nth(1)
+            pilih_konsolidasi.click()
+            time.sleep(0.25)
+            # FIXME: Konsolidasi is hard coded
+            pilih_konsolidasi.type("SKPD dan Unit Konsolidasi")
+            time.sleep(0.25)
+            pilih_konsolidasi.press("Enter")
+
+            # Dropdown - Jenis Transaksi
+            # FIXME: Jenis Transaksi input is hard-coded
+            title_jenis = self.page.locator('div:has-text("Jenis Transaksi")')
+            pilih_jenis = title_jenis.locator("input").nth(2)
+            pilih_jenis.click()
+            time.sleep(0.25)
+            # FIXME: Jenis Transaksi is hard coded
+            pilih_jenis.type("Jurnal Umum")
+            time.sleep(0.25)
+            pilih_jenis.press("Enter")
+
+            # Button - Terapkan
+            btn_terapkan = self.page.locator('button:has-text("Terapkan")').first
+            btn_terapkan.wait_for()
+            btn_terapkan.click()
+            time.sleep(1)
+
+            # Table
+            table_selector = self.page.locator()
+
+            # Navigation - Arrow
+            pagination_ul = self.page.locator(
+                'ul[role="menubar"][aria-label="Pagination"][class="pagination b-pagination"]'
+            )
+            pagination_ul.scroll_into_view_if_needed()
+
+            next_arrow = pagination_ul.locator("li").nth(8)
+            next_arrow.scroll_into_view_if_needed()
+            next_arrow.click()
+
+            self.page.wait_for_timeout(500)
+
+            input(">>>>>>>>>>>>>>>>>>>>> Scrape end")
 
         except Exception as e:
             print(f"Critical error occurred: {e}")
