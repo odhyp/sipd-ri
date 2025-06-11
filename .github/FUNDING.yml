@@ -1,7 +1,2 @@
-# These are supported funding model platforms
-
-github: [odhyp]
-patreon: # Replace with a single Patreon username
-ko_fi: # Replace with a single Ko-fi username
-buy_me_a_coffee: # Replace with a single Buy Me a Coffee username
-custom: # Replace with up to 4 custom sponsorship URLs e.g., ['link1', 'link2']
+github: odhyp
+buy_me_a_coffee: odhyp
