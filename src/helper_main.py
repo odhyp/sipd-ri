@@ -17,6 +17,8 @@ from src.helper_excel import ExcelHelper
 from src.utils import select_excel_file, select_excel_files, get_current_date
 
 
+# ---------- Executed menu functions ------------------------------------------
+# ---------- 1
 def save_cookies():
     with Progress() as progress:
         task = progress.add_task("[green]Saving cookies...", total=100)
@@ -32,6 +34,13 @@ def save_cookies():
         with SIPDBot() as bot:
             bot.login()
         progress.update(task, advance=40, description="Cookie saved!")
+
+
+# ---------- a1 - alpha
+def posting_jurnal():
+    with SIPDBot() as bot:
+        bot.login()
+        bot.posting_jurnal_belanja()
 
 
 # ---------- a2 - beta success
@@ -105,7 +114,7 @@ def download_buku_jurnal():
     output_dir = f"Buku Jurnal {today}"
 
     # FIXME: Update using Tkinter file select
-    skpd_path = "data/DIKPORA-dan-anak.txt"
+    skpd_path = "data/SKPD-2024.txt"
 
     skpd_list = []
     with open(skpd_path, mode="r", encoding="utf-8") as file:
@@ -114,6 +123,16 @@ def download_buku_jurnal():
     with SIPDBot() as bot:
         bot.login()
         bot.download_buku_jurnal(output_dir, skpd_list)
+
+
+# ---------- a8 - building now
+def scrape_buku_jurnal():
+    skpd_name = "DINAS PENDIDIKAN, PEMUDA DAN OLAH RAGA"
+    page_to_scrape = 55
+
+    with SIPDBot() as bot:
+        bot.login()
+        bot.scrape_buku_jurnal(skpd_name, page_to_scrape)
 
 
 # ---------- b1
@@ -194,6 +213,7 @@ def menu_table():
     table.add_row("a5", "Download LK - LO")
     table.add_row("a6", "Download LK - LPE")
     table.add_row("a7", "Download Buku Jurnal")
+    table.add_row("a8", "Scrape Tabel Buku Jurnal")
     table.add_row()
 
     # Penatausahaan
@@ -338,6 +358,21 @@ def run_app():
                 finally:
                     menu_return()
 
+            # a8 - Scrape Buku Jurnal
+            elif choice == "a8":
+                menu_clear()
+                menu_title()
+
+                console.print("Scrape Buku Jurnal - Test Function", style="blue")
+                try:
+                    scrape_buku_jurnal()
+                except Exception:
+                    console.print(Traceback())
+                else:
+                    pass
+                finally:
+                    menu_return()
+
             # b1 - Download Laporan Realisasi
             elif choice == "b1":
                 menu_clear()
@@ -354,6 +389,16 @@ def run_app():
                     pass
                 finally:
                     menu_return()
+
+            # c1 - Resave Excel (test)
+            elif choice == "c1":
+                menu_clear()
+                menu_title()
+
+                file_paths = select_excel_files()
+
+                for file in file_paths:
+                    ExcelHelper.resave_excel(file)
 
             # 0 - Exit
             elif choice == "0":
