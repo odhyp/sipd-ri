@@ -7,7 +7,7 @@ Provides functions for reading, manipulating, and potentially other operations o
 import pandas as pd
 import os
 
-from win32com.client import Dispatch, DispatchEx
+from win32com.client import DispatchEx
 
 
 class ExcelHelper:
