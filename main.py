@@ -43,6 +43,10 @@ logging.basicConfig(
     ],
 )
 
+logger = logging.getLogger(__name__)
+if args.dev:
+    logger.debug("Running in development mode with DEBUG logging enabled.")
+
 
 # ---- MAIN EXECUTION ----
 if __name__ == "__main__":
