@@ -1,7 +1,7 @@
 """
 This module provides the SIPDBotBase class, which serves as a foundational context manager
 for browser automation tasks using Playwright. It handles the setup and teardown of the
-browser, context, and page objects, enabling derived classes to focus on automation logic
+browser, context, and page objects, allowing derived classes to focus on automation logic
 without managing browser lifecycle details.
 """
 
@@ -43,7 +43,7 @@ class SIPDBotBase:
             - The browser is launched in non-headless mode (`headless=False`) to allow visual
             debugging.
             - The `--start-maximized` argument ensures the browser opens in maximized mode.
-            - A universal viewport is disabled using `no_viewport=True`.
+            - The default viewport is disabled using `no_viewport=True` to allow full screen.
         """
         self.playwright = sync_playwright().start()
         self.browser = self.playwright.chromium.launch(
