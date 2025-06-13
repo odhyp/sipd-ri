@@ -30,10 +30,10 @@ args = parser.parse_args()
 
 # ---- LOGGING SETUP -----
 os.makedirs("logs", exist_ok=True)
-log_level = logging.DEBUG if args.dev else logging.INFO
+LOG_LEVEL = logging.DEBUG if args.dev else logging.INFO
 log_filename = datetime.now().strftime("logs/%Y-%m-%d.log")
 logging.basicConfig(
-    level=log_level,
+    level=LOG_LEVEL,
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
     handlers=[
         logging.StreamHandler(),
