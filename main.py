@@ -1,3 +1,20 @@
+"""
+Main entry point for the SIPD-RI Helper CLI.
+
+This script sets up command-line argument parsing and logging configuration,
+then launches the interactive menu interface for performing automated actions
+on the SIPD-RI web application.
+
+Usage:
+    python main.py [--dev]
+
+Arguments:
+    --dev : Run the tool in development mode with DEBUG-level logging.
+
+Logs:
+    Log files are stored in the `logs/` directory, named by date (e.g. 2025-06-10.log).
+"""
+
 import os
 import logging
 import argparse
