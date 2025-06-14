@@ -1,3 +1,20 @@
+"""
+This module provides the LoginMixin class for the SIPDBot automation framework.
+
+The LoginMixin encapsulates all functionality related to logging in to the
+SIPD-RI web application. It supports two login mechanisms:
+    1. Manual login through browser interaction.
+    2. Session restoration via saved cookies.
+
+Features:
+- Automatically determines whether to log in manually or restore from session cookies.
+- Saves session cookies to `cookies.json` after manual login.
+- Loads cookies from file and injects them into the browser context.
+- Handles invalid or expired cookies gracefully by falling back to manual login.
+
+Intended to be used as a mixin alongside SIPDBotBase for browser and page access.
+"""
+
 import os
 import json
 import logging
