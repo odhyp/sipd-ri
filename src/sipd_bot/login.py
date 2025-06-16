@@ -83,11 +83,7 @@ class LoginMixin:
         logger.info("Navigating to login page manually: %s", self.URL_LOGIN)
         self.page.goto(self.URL_LOGIN, timeout=120_000)
         self.page.bring_to_front()
-        logger.debug("Waiting for dashboard URL after manual login...")
         self.page.wait_for_url("**/dashboard", timeout=300_000)
-
-        menu_link = self.page.locator('a:has-text("Akuntansi")').first
-        menu_link.wait_for(timeout=120_000)
         logger.info("Manual login successful")
 
     def login_with_cookies(self):
@@ -114,7 +110,6 @@ class LoginMixin:
             self.page.goto(self.URL_LOGIN, timeout=120_000)
             self.page.bring_to_front()
             self.page.wait_for_url("**/dashboard", timeout=300_000)
-
             logger.info("Logged in using cookies")
 
         except json.JSONDecodeError:
