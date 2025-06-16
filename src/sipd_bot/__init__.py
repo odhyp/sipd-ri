@@ -11,9 +11,11 @@ Classes:
 
 from .base import SIPDBotBase
 from .login import LoginMixin
+from .utils import UtilsMixin
+from .download_lampiran import DownloadLampiranMixin
 
 
-class SIPDBot(SIPDBotBase, LoginMixin):
+class SIPDBot(SIPDBotBase, LoginMixin, UtilsMixin, DownloadLampiranMixin):
     """
     The main SIPDBot class combining all mixins.
     """
