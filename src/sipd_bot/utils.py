@@ -31,7 +31,7 @@ class UtilsMixin:
         """
         for attempt in range(retries):
             try:
-                self.page.wait_for_selector(selector, timeout=3000)
+                self.page.wait_for_selector(selector, timeout=3_000)
                 return True
             except Exception:
                 logger.warning(
@@ -41,7 +41,7 @@ class UtilsMixin:
                     retries,
                 )
                 self.page.reload()
-                self.page.wait_for_timeout(delay * 1000)
+                self.page.wait_for_timeout(delay * 1_000)
         logger.error("Failed to find selector after %s retries: %s", retries, selector)
         return False
 
@@ -65,7 +65,7 @@ class UtilsMixin:
             for sel in selectors:
                 locator = self.page.locator(sel)
                 try:
-                    locator.wait_for(state="attached", timeout=2_000)
+                    locator.wait_for(state="attached", timeout=3_000)
                 except Exception:
                     logger.debug("404 indicator not found: %s", sel)
                     return False
