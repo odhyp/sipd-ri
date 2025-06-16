@@ -73,6 +73,29 @@ class LoginMixin:
             json.dump(cookies, f)
         logger.info("Cookies saved to cookies.json")
 
+    def reset_cookies(self):
+        """
+        Clears the saved session cookies and performs a fresh login.
+
+        This is useful when the user needs to switch accounts or change the working year
+        in SIPD-RI, which typically requires a new login session.
+
+        Actions:
+            - Deletes the existing `cookies.json` file.
+            - Logs the action.
+            - Triggers the login flow.
+
+        Raises:
+            FileNotFoundError: If `cookies.json` does not exist (handled silently).
+        """
+        try:
+            os.remove("cookies.json")
+            logger.info("Existing cookies removed")
+        except FileNotFoundError:
+            logger.warning("No existing cookies to remove")
+
+        self.login()
+
     def login_manual(self):
         """
         Perform a manual login to SIPD-RI.
