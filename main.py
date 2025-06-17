@@ -1,17 +1,42 @@
 """
-A simple command-line app for SIPD-RI tasks by Odhy Pradhana
+Main entry point for the SIPD-RI Helper CLI.
+
+This script sets up command-line argument parsing and logging configuration,
+then launches the interactive menu interface for performing automated actions
+on the SIPD-RI web application.
+
+Usage:
+    python main.py [--dev]
+
+Arguments:
+    --dev : Run the tool in development mode with DEBUG-level logging.
+
+Logs:
+    Log files are stored in the `logs/` directory, named by date (e.g. 2025-06-10.log).
 """
 
-from src.helper_main import run_app
+import logging
+import argparse
+from src.menu import run_menu
+from src.log_setup import setup_logging
 
 
-def main():
-    """
-    The entry point of the program.
-    Calls the `run_app` function to initialize the application's main menu.
-    """
-    run_app()
+# ---- CLI ARG PARSER ----
+parser = argparse.ArgumentParser(description="Run SIPD-RI Helper")
+parser.add_argument(
+    "--dev", action="store_true", help="Development mode with DEBUG logging"
+)
+args = parser.parse_args()
 
 
+# ---- LOGGING SETUP -----
+setup_logging(args.dev)
+
+logger = logging.getLogger(__name__)
+if args.dev:
+    logger.debug("Running in development mode with DEBUG logging enabled")
+
+
+# ---- MAIN EXECUTION ----
 if __name__ == "__main__":
-    main()
+    run_menu()

@@ -41,7 +41,7 @@ Planned updates:
 
 - [ ] Rewrite `AKLAP` and `PENATAUSAHAAN` modules for the new interface
 - [ ] Update and sync the latest `SKPD` and `Sub-SKPD` data
-- [ ] Migrate to a modern Python project structure using [`uv`](https://github.com/astral-sh/uv)
+- [x] Migrate to a modern Python project structure using [`uv`](https://github.com/astral-sh/uv)
 
 ## Documentation
 
