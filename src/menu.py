@@ -44,32 +44,38 @@ def handle_download_perkada():
         clear_screen()
         menu_header()
 
-        print("Download Lampiran I.1 (Perkada)")
-        print("1. All OPD")
-        print("2. All UPT")
-        print("0. Back")
+        print("---------- Download Lampiran I.1 (Perkada) ----------")
+        print("1. Semua OPD")
+        print("2. Semua UPT")
+        print("0. Kembali")
 
-        choice = input("\nSelect an option: ").strip()
+        choice = input("\nPilih opsi: ").strip()
 
         if choice == "1":
+            skpd_list = []
+            with open("data/SKPD-2024.txt", mode="r", encoding="utf-8") as f:
+                skpd_list = [line.strip() for line in f]
+
             with SIPDBot() as bot:
                 bot.login()
-                bot.download_lampiran_perkada()
-                print("All OPD")
+                bot.download_lampiran_perkada(skpd_list)
             break
 
         elif choice == "2":
+            skpd_kpa_list = []
+            with open("data/SKPD-KPA-2024.txt", mode="r", encoding="utf-8") as f:
+                skpd_kpa_list = [line.strip() for line in f]
+
             with SIPDBot() as bot:
                 bot.login()
-                bot.download_lampiran_perkada()
-                print("All UPT")
+                bot.download_lampiran_perkada(skpd_kpa_list)
             break
 
         elif choice == "0":
             break
 
         else:
-            input("Invalid choice! Press Enter to continue...")
+            input("Pilihan tidak valid! Tekan Enter untuk melanjutkan...")
 
 
 # ---------- 9. Reset session cookies ----------
@@ -86,11 +92,14 @@ def run_menu():
         clear_screen()
         menu_header()
 
+        print("---------- Akuntansi ----------")
         print("1. Download Lampiran I.1 (Perkada)")
-        print("9. Reset session cookies")
-        print("0. Exit")
 
-        choice = input("\nSelect an option: ").strip()
+        print("\n---------- Lain-lain ----------")
+        print("9. Reset cookies")
+        print("0. Keluar")
+
+        choice = input("\nPilih opsi: ").strip()
 
         if choice == "1":
             handle_download_perkada()
@@ -99,10 +108,10 @@ def run_menu():
             handle_reset_cookies()
 
         elif choice == "0":
-            print("Goodbye!")
+            print("Selamat tinggal!")
             break
 
         else:
-            input("Invalid choice! Press Enter to continue...")
+            input("Pilihan tidak valid! Tekan Enter untuk melanjutkan...")
 
     logger.info("SIPD-RI Helper Menu closed")
