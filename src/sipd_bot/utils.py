@@ -65,7 +65,7 @@ class UtilsMixin:
             for sel in selectors:
                 locator = self.page.locator(sel)
                 try:
-                    locator.wait_for(state="attached", timeout=3_000)
+                    locator.wait_for(state="attached", timeout=5_000)
                 except Exception:
                     logger.debug("404 indicator not found: %s", sel)
                     return False
@@ -76,7 +76,7 @@ class UtilsMixin:
             logger.exception("Error while checking for 404 page: %s", exc)
             raise
 
-    def to_aklap(self, attempts: int = 3):
+    def to_aklap(self, attempts: int = 5):
         """
         Navigate to the AKLAP menu within the SIPD-RI web application.
 
@@ -86,7 +86,7 @@ class UtilsMixin:
 
         Args:
             attempts (int, optional): Maximum number of retry attempts if a 404 page
-            is detected. Defaults to 3.
+            is detected. Defaults to 5.
 
         Raises:
             RuntimeError: If the AKLAP page fails to load successfully after all attempts.
