@@ -52,23 +52,25 @@ def handle_download_perkada():
         choice = input("\nPilih opsi: ").strip()
 
         if choice == "1":
+            output_dir = "Lampiran_Perkada_OPD"
             skpd_list = []
             with open("data/SKPD-2024.txt", mode="r", encoding="utf-8") as f:
                 skpd_list = [line.strip() for line in f]
 
             with SIPDBot() as bot:
                 bot.login()
-                bot.download_lampiran_perkada(skpd_list)
+                bot.download_lampiran_perkada(output_dir, skpd_list)
             break
 
         elif choice == "2":
+            output_dir = "Lampiran_Perkada_UPT"
             skpd_kpa_list = []
             with open("data/SKPD-KPA-2024.txt", mode="r", encoding="utf-8") as f:
                 skpd_kpa_list = [line.strip() for line in f]
 
             with SIPDBot() as bot:
                 bot.login()
-                bot.download_lampiran_perkada(skpd_kpa_list)
+                bot.download_lampiran_perkada(output_dir, skpd_kpa_list)
             break
 
         elif choice == "0":
