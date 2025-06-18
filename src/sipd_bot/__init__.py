@@ -12,10 +12,13 @@ Classes:
 from .base import SIPDBotBase
 from .login import LoginMixin
 from .utils import UtilsMixin
-from .download_lampiran import DownloadLampiranMixin
+from .aklap_lampiran import AklapLampiranMixin
+from .aklap_jurnal_umum import AklapJurnalUmumMixin
 
 
-class SIPDBot(SIPDBotBase, LoginMixin, UtilsMixin, DownloadLampiranMixin):
+class SIPDBot(
+    SIPDBotBase, LoginMixin, UtilsMixin, AklapLampiranMixin, AklapJurnalUmumMixin
+):
     """
     The main SIPDBot class combining all mixins.
     """
