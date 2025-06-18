@@ -5,11 +5,15 @@ This menu provides access to various SIPDBot features through a terminal-based i
 Each option maps to a specific automation task or utility.
 
 Main Menu:
-1. Download Lampiran I.1 (Perkada)
-   ├─ 1. All OPD
-   └─ 2. All UPT
+1. Jurnal Umum
+   ├─ 1. Input Jurnal Umum
+   └─ 0. Kembali
+2. Download Lampiran I.1 (Perkada)
+   ├─ 1. Semua OPD
+   ├─ 2. Semua UPT
+   └─ 0. Kembali
 9. Reset session cookies
-0. Exit
+0. Keluar
 
 Usage:
 - Navigates using numeric input.
@@ -22,7 +26,9 @@ Structure:
 
 import os
 import logging
+import pandas as pd
 from src.sipd_bot import SIPDBot
+from src.file_manager import FileManager
 
 logger = logging.getLogger(__name__)
 
@@ -38,7 +44,40 @@ def menu_header():
     print("By: Odhy (odhyp.com)\n")
 
 
-# ---------- 1. Download Lampiran I.1 (Perkada) ----------
+# ---------- 1. Jurnal Umum ----------
+def handle_jurnal_umum():
+    while True:
+        clear_screen()
+        menu_header()
+
+        print("---------- Jurnal Umum ----------")
+        print("1. Input Jurnal Umum")
+        print("0. Kembali")
+
+        choice = input("\nPilih opsi: ").strip()
+
+        if choice == "1":
+            file_path = FileManager.select_file()
+            if not file_path:
+                continue
+
+            df = pd.read_excel(file_path, dtype=str)
+            jurnal_umum = df.values.tolist()
+
+            with SIPDBot() as bot:
+                bot.login()
+                bot.input_jurnal_umum(jurnal_umum)
+            break
+
+        elif choice == "0":
+            break
+
+        else:
+            input("Pilihan tidak valid! Tekan Enter untuk melanjutkan...")
+
+
+# ---------- 2. Download Lampiran I.1 (Perkada) ----------
+# TODO: update perkada (Sub-menu) to Lampiran (Menu) instead
 def handle_download_perkada():
     while True:
         clear_screen()
@@ -95,7 +134,8 @@ def run_menu():
         menu_header()
 
         print("---------- Akuntansi ----------")
-        print("1. Download Lampiran I.1 (Perkada)")
+        print("1. Jurnal Umum")
+        print("2. Download Lampiran I.1 (Perkada)")
 
         print("\n---------- Lain-lain ----------")
         print("9. Reset cookies")
@@ -104,6 +144,9 @@ def run_menu():
         choice = input("\nPilih opsi: ").strip()
 
         if choice == "1":
+            handle_jurnal_umum()
+
+        elif choice == "2":
             handle_download_perkada()
 
         elif choice == "9":
