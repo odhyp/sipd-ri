@@ -96,7 +96,7 @@ class UtilsMixin:
         if self.ensure_element_visible(menu_akuntansi):
             logger.info("Accessing AKLAP menu...")
             url_aklap = "https://sipd.kemendagri.go.id/penatausahaan/aklap"
-            self.page.goto(url_aklap)
+            self.page.goto(url_aklap, wait_until="domcontentloaded")
 
             for attempt in range(attempts):
                 if not self.is_404():
@@ -104,7 +104,7 @@ class UtilsMixin:
                 logger.warning(
                     "Reloading AKLAP page (attempt %s/%s)", attempt + 1, attempts
                 )
-                self.page.goto(url_aklap)
+                self.page.goto(url_aklap, wait_until="domcontentloaded")
             else:
                 logger.error("Failed to load AKLAP after %s attempts", attempts)
                 raise RuntimeError("Could not load AKLAP page")
