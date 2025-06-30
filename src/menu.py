@@ -76,6 +76,37 @@ def handle_jurnal_umum():
             input("Pilihan tidak valid! Tekan Enter untuk melanjutkan...")
 
 
+# ---------- 2. Posting Jurnal ----------
+def handle_posting_jurnal():
+    while True:
+        clear_screen()
+        menu_header()
+
+        print("---------- Posting Jurnal ----------")
+        print("1. Pendapatan")
+        print("2. Belanja")
+        print("0. Kembali")
+
+        choice = input("\nPilih opsi: ").strip()
+
+        if choice == "1":
+            print(">>>>>>>>>>>>> Posting Jurnal Pendapatan")
+            with SIPDBot() as bot:
+                bot.login()
+                bot.posting_pendapatan()
+            break
+
+        elif choice == "2":
+            input(">>>> placehold, press enter")
+            break
+
+        elif choice == "0":
+            break
+
+        else:
+            input("Pilihan tidak valid! Tekan Enter untuk melanjutkan...")
+
+
 # ---------- 2. Download Lampiran I.1 (Perkada) ----------
 # TODO: update perkada (Sub-menu) to Lampiran (Menu) instead
 def handle_download_perkada():
@@ -135,7 +166,8 @@ def run_menu():
 
         print("---------- Akuntansi ----------")
         print("1. Jurnal Umum")
-        print("2. Download Lampiran I.1 (Perkada)")
+        print("2. Posting Jurnal")
+        print("3. Download Lampiran I.1 (Perkada)")
 
         print("\n---------- Lain-lain ----------")
         print("9. Reset cookies")
@@ -147,6 +179,9 @@ def run_menu():
             handle_jurnal_umum()
 
         elif choice == "2":
+            handle_posting_jurnal()
+
+        elif choice == "3":
             handle_download_perkada()
 
         elif choice == "9":
