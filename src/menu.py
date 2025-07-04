@@ -97,7 +97,10 @@ def handle_posting_jurnal():
             break
 
         elif choice == "2":
-            input(">>>> placehold, press enter")
+            print(">>>>>>>>>>>>> Posting Jurnal Belanja")
+            with SIPDBot() as bot:
+                bot.login()
+                bot.posting_belanja()
             break
 
         elif choice == "0":
