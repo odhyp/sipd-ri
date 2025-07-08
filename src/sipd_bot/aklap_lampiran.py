@@ -1,3 +1,9 @@
+"""
+This module provides the AklapLampiranMixin class for the SIPDBot automation framework.
+
+It encapsulates all functionality related to 'LPPD' menu in AKLAP.
+"""
+
 import logging
 
 
@@ -5,7 +11,21 @@ logger = logging.getLogger(__name__)
 
 
 class AklapLampiranMixin:
+    """
+    Provides automation functionality for the 'LPPD' section of AKLAP.
+    """
+
     def download_lampiran_perkada(self, output_dir: str, skpd_list: list):
+        """
+        Download Lampiran I.1 (Perkada) as PDF file for given SKPD in AKLAP LPPD menu.
+
+        Args:
+            output_dir (str): Output directory for the PDF file
+            skpd_list (list): A list of SKPD names
+
+        Note:
+            - Output PDF name: `Lampiran I.1 - <SKPD_NAME>.pdf`
+        """
         self.to_aklap()
         # TODO: add file select for skpd list
         # TODO: implement self.ensure_element_visible in aklap_jurnal_umum.py
