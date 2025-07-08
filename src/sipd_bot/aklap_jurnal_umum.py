@@ -1,3 +1,9 @@
+"""
+This module provides the AklapJurnalUmumMixin class for the SIPDBot automation framework.
+
+It encapsulates all functionality related to 'Jurnal Umum' menu in AKLAP.
+"""
+
 import logging
 import pandas as pd
 from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
@@ -7,7 +13,26 @@ logger = logging.getLogger(__name__)
 
 
 class AklapJurnalUmumMixin:
+    """
+    Provides automation functionality for the 'Jurnal Umum' section of AKLAP.
+    """
+
     def input_jurnal_umum(self, jurnal_umum: list):
+        """
+        Automates the process of inputting multiple 'Jurnal Umum' records into the AKLAP system.
+
+        Parameters:
+            jurnal_umum (list): A list of journal entries, where each entry is a list containing
+                                [kode_rekening, debit, kredit].
+
+        Behavior:
+            - Navigates to the Jurnal Umum menu and selects the 'Input Jurnal Umum' tab.
+            - For each entry:
+                - Inputs 'Kode Rekening' with dropdown selection (with retry mechanism).
+                - Fills in Debit and/or Kredit values if present.
+                - Clicks the 'Tambah' button to add the entry.
+            - Prompts the user at the start and end of the process for manual confirmation.
+        """
         self.to_aklap()
         menu_jurnal_umum = 'a.sidebar-link:has-text("Jurnal Umum")'
         self.ensure_element_visible(menu_jurnal_umum)
