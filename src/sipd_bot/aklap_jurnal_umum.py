@@ -50,7 +50,7 @@ class AklapJurnalUmumMixin:
                 )
 
                 try:
-                    dropdown_kode_rekening.wait_for(timeout=3_000, state="visible")
+                    dropdown_kode_rekening.wait_for(timeout=10_000, state="visible")
                     dropdown_kode_rekening.click()
                     break
                 except PlaywrightTimeoutError:
