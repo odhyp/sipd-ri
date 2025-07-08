@@ -1,5 +1,8 @@
-# TODO: add module docstring
+"""
+This module provides the AklapPostingJurnalMixin class for the SIPDBot automation framework.
 
+It encapsulates all functionality related to 'Posting Jurnal' menu in AKLAP.
+"""
 
 import logging
 from playwright.sync_api import expect, TimeoutError as PlaywrightTimeoutError
@@ -9,17 +12,25 @@ logger = logging.getLogger(__name__)
 
 
 class AklapPostingJurnalMixin:
-    def posting_pendapatan(self):
+    """
+    Provides automation functionality for the 'Posting Jurnal' section of AKLAP.
+    """
+
+    def posting_pendapatan(self, skpd: str):
         """
         TODO: add docstring
 
-        Form group list:
-        - nth(0): SKPD
-        - nth(1): Transaksi
-        - nth(2): Status
-        - nth(3): Tanggal Awal
-        - nth(4): Tanggal Akhir
-        - nth(5): Filter By Keyword
+        Args:
+            skpd (str): The SKPD name
+
+        Note:
+            Form group list:
+            - nth(0): SKPD
+            - nth(1): Transaksi
+            - nth(2): Status
+            - nth(3): Tanggal Awal
+            - nth(4): Tanggal Akhir
+            - nth(5): Filter By Keyword
         """
         self.to_aklap()
 
@@ -111,17 +122,21 @@ class AklapPostingJurnalMixin:
 
         input(">>>>>>>>>>>>>>>>>>>> ENTER")
 
-    def posting_belanja(self):
+    def posting_belanja(self, skpd: str):
         """
         TODO: add docstring
 
-        Form group list:
-        - nth(0): SKPD
-        - nth(1): Filter By Keyword
-        - nth(2): Tanggal Awal
-        - nth(3): Tanggal Akhir
-        - nth(4): Status
-        - nth(5): Jenis Dokumen
+        Args:
+            skpd (str): The SKPD name
+
+        Note:
+            Form group list:
+            - nth(0): SKPD
+            - nth(1): Filter By Keyword
+            - nth(2): Tanggal Awal
+            - nth(3): Tanggal Akhir
+            - nth(4): Status
+            - nth(5): Jenis Dokumen
         """
         self.to_aklap()
 
