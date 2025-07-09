@@ -22,6 +22,7 @@ from src.log_setup import setup_logging
 
 
 # ---- CLI ARG PARSER ----
+# TODO: replace with Rich or Typer
 parser = argparse.ArgumentParser(description="Run SIPD-RI Helper")
 parser.add_argument(
     "--dev", action="store_true", help="Development mode with DEBUG logging"
